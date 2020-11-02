@@ -1,0 +1,40 @@
+<div class="jumbotron text-center">
+    <h1>Recommendation Filter</h1>
+    <p>Select your filter values</p>
+</div>
+
+<div class="container" style="margin-left: 0%;">
+    <div class="row">
+      <div class="col-sm-4">
+        <h2>Filters</h2>
+        <label for="">Género: </label>
+        <select name="" id="" class="form-control"></select>
+        <h5>Categorias:</h5>
+        <label for="">IMDB note:</label>
+        <input class="form-control" type="number" min="0" max="100" [(ngModel)] = "imdb" (ngModelChange)="calculateTotal(imdb)" required>
+        <label for="">MetaScore note:</label>
+        <input class="form-control" type="number" min="0" [(ngModel)] = "metascore" (ngModelChange)="calculateTotal(imdb)" max="100" required>
+        <label for="">Community note:</label>
+        <input class="form-control" type="number" min="0" [(ngModel)] = "community" (ngModelChange)="calculateTotal(imdb)" max="100" required>
+        <label for="">Platform favorite:</label>
+        <input class="form-control" type="number" min="0" [(ngModel)] = "platform" (ngModelChange)="calculateTotal(imdb)" max="100" required>
+        <label for="">Popularity index:</label>
+        <input class="form-control" type="number" min="0" [(ngModel)] = "popularity" (ngModelChange)="calculateTotal(imdb)" max="100" required>
+        <div>
+          <label for="" *ngIf="goodT != -1" style="color: red;">The sum of categories must be 100</label>
+          <label for="" *ngIf="goodF != -1" style="color: red;">Solve the problem first</label>
+        </div>
+        <button color="primary" class="btn btn-dark" (click)="filter($event)">Filtrar</button>
+      </div>
+      <div class="col-lg-8 col-sm-8" style="margin-right: 0%;">
+        <div class="card">
+            <img class="card-img-top" src="67857-flavor-9-article_m-1.jpg" alt="Card image">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>

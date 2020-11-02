@@ -127,6 +127,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "MyMovieClientApp"
+    }
+  },
+  "defaultProject": "MyMovieClientApp",
+  "cli": {
+    "analytics": false
+  }
 }
