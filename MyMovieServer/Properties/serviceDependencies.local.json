@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "type": "secrets.user"
+    },
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/soa-devteam/databases/MyMovieDB",
+      "type": "mssql.azure",
+      "connectionId": "Server=tcp:soa-devteam.database.windows.net,1433;InitialCatalog=MyMovieDB;PersistSecurityInfo=False;UserID=SDTadmin;Password=Soadevteam12345;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;ConnectionTimeout=30;",
+      "secretStore": "LocalSecretsFile"
+    }
+  }
+}
