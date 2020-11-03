@@ -36,6 +36,9 @@ namespace MyMovieServer
                     .AllowAnyHeader());
             });
 
+            services.AddControllers().AddNewtonsoftJson();
+            services.AddControllersWithViews().AddNewtonsoftJson();
+            services.AddRazorPages().AddNewtonsoftJson();
             services.AddAuthentication(IISDefaults.AuthenticationScheme);
             services.AddDbContext<MyMovieDBContext>();
             services.AddScoped<MyMovieDBContext>();
