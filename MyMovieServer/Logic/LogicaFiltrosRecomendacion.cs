@@ -37,6 +37,16 @@ namespace MyMovieServer.Logic
             }
 
             return peliculas;
-    }
+        }
+
+        public List<Genero> getGen(MyMovieDBContext _context)
+        {
+            List<Genero> generos = new List<Genero>();
+            foreach (Genero gen in _context.Genero.ToList())
+            {
+                generos.Add(gen);
+            }
+            return generos;
+        }
     }
 }

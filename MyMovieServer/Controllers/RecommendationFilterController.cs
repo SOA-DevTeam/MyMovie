@@ -7,6 +7,8 @@ using MyMovieServer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MyMovieServer.Logic;
+using MyMovieServer.Presentation_Model;
+using System.Net.Security;
 
 namespace MyMovieServer.Controllers
 {
@@ -24,12 +26,35 @@ namespace MyMovieServer.Controllers
             _context = context;
         }
         [HttpGet("get")]
-        public List<Pelicula> GetPeliculas()
+        public List<CalificacionesDePelicula> GetPeliculas(int imdb, int metascore, int popularidad)
         {
             List<Pelicula> peliculas = new List<Pelicula>();
+            List<CalificacionesDePelicula> calificaciones = new List<CalificacionesDePelicula>();
             LogicaFiltrosRecomendacion get = new LogicaFiltrosRecomendacion();
             peliculas = get.getPeliculas(_context);
-            return peliculas;
+            System.Collections.IList list = peliculas;
+            for (int i = 0; i < list.Count; i++)
+            {
+                CalificacionesDePelicula pel = new CalificacionesDePelicula();
+                pel.IdGenero = peliculas[i].IdGenero;
+                pel.IdPelicula = peliculas[i].IdPelicula;
+                pel.Imagen = peliculas[i].Imagen;
+                pel.IndicePopularidad = peliculas[i].IndicePopularidad;
+                pel.NombrePelicula = peliculas[i].NombrePelicula;
+                pel.NotaImdb = peliculas[i].NotaImdb;
+                pel.NotaMetascore = peliculas[i].NotaMetascore;
+                calificaciones.Add(pel);
+            }
+            return calificaciones;
+        }
+
+        [HttpGet ("gen")]
+        public List<Genero> GetGen()
+        {
+            List<Genero> generos = new List<Genero>();
+            LogicaFiltrosRecomendacion logic = new LogicaFiltrosRecomendacion();
+            generos = logic.getGen(_context);
+            return generos;
         }
     }
 }

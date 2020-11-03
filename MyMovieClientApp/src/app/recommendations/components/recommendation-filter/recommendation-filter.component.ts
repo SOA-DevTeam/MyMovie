@@ -1,6 +1,8 @@
-
+import { HttpService } from './../../../http.service';
 import { Component, OnInit} from '@angular/core';
+
 import { HttpClient } from '@angular/common/http';
+import { Genero } from '../../models/genero';
 
 @Component({
   selector: 'app-recommendation-filter',
@@ -9,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RecommendationFilterComponent implements OnInit {
 
-  constructor(private http: HttpClient) 
+  constructor(private http: HttpClient, private httpS : HttpService) 
   {
 
   }
@@ -31,8 +33,17 @@ export class RecommendationFilterComponent implements OnInit {
 
   goodF : number = -1;
 
+  generos : Genero[];
+
+  genero : number;
+
   ngOnInit(): void {
+      this.httpS.getAllGen().subscribe(result => {
+        this.generos = result;
+      }, error => console.error(error));
   }
+
+
 
   calculateTotal(item){
     console.log(this.total);
@@ -45,13 +56,16 @@ export class RecommendationFilterComponent implements OnInit {
       this.goodT = 1;
     }else{
       this.goodT = -1;
+      console.log(this.total);
     }
 
     }
 
   filter(event){
-    if(this.goodT = 1){
+    if(this.goodT == 1){
       this.goodF = 1;
+    }else{
+      this.goodF = -1;
     }
   }
 
