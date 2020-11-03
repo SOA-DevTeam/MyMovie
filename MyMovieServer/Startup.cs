@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MyMovieServer.Logic;
 using MyMovieServer.Models;
+using Newtonsoft.Json.Serialization;
 
 namespace MyMovieServer
 {
@@ -37,6 +38,9 @@ namespace MyMovieServer
                     .AllowAnyHeader());
             });
 
+            services.AddControllers().AddNewtonsoftJson();
+            services.AddControllersWithViews().AddNewtonsoftJson();
+            services.AddRazorPages().AddNewtonsoftJson();
             services.AddAuthentication(IISDefaults.AuthenticationScheme);
             services.AddDbContext<MyMovieDBContext>();
             services.AddScoped<MyMovieDBContext>();
