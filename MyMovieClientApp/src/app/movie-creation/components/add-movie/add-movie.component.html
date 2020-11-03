@@ -16,7 +16,7 @@
 </div>
 <div class="container-fluid rounded" id="divwrap">
     <div class="row">
-        <div class="col-6 rounded" id="div1">
+        <div class="col rounded" id="div1">
             <form [formGroup]="moviesForm" (ngSubmit)="onSubmit()">
                 <p class="h3">Datos de la Película</p>
                 <br>
@@ -101,7 +101,7 @@
             <input type="file" (change)="onChange($event)" id="imageS"/>
             <br>
             <div class="container" *ngIf="myimage">
-            <img [src]="myimage | async" width="700px" height="700px" alt="" />
+            <img [src]="myimage | async" width="350px" height="350px" alt="" />
             </div>
         </div>
     </div>
