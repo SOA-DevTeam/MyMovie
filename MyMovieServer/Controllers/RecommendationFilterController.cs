@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MyMovieServer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-
+using MyMovieServer.Logic;
 
 namespace MyMovieServer.Controllers
 {
@@ -27,28 +27,8 @@ namespace MyMovieServer.Controllers
         public List<Pelicula> GetPeliculas()
         {
             List<Pelicula> peliculas = new List<Pelicula>();
-            foreach (var pelicula in _context.Pelicula.ToList())
-            {
-                Console.Out.WriteLine("Hola");
-                Pelicula dummy = new Pelicula();
-                dummy.AnoPelicula = pelicula.AnoPelicula;
-                dummy.Calificacion = pelicula.Calificacion;
-                dummy.Director = pelicula.Director;
-                dummy.Favorito = pelicula.Favorito;
-                dummy.IdEstilo = pelicula.IdEstilo;
-                dummy.IdEstiloNavigation = pelicula.IdEstiloNavigation;
-                dummy.IdGenero = pelicula.IdGenero;
-                dummy.IdGeneroNavigation = pelicula.IdGeneroNavigation;
-                dummy.IdIdioma = pelicula.IdIdioma;
-                dummy.IdIdiomaNavigation = pelicula.IdIdiomaNavigation;
-                dummy.IdPelicula = pelicula.IdPelicula;
-                dummy.Imagen = pelicula.Imagen;
-                dummy.IndicePopularidad = pelicula.IndicePopularidad;
-                dummy.NombrePelicula = pelicula.NombrePelicula;
-                dummy.NotaImdb = pelicula.NotaImdb;
-                dummy.NotaMetascore = pelicula.NotaMetascore;
-                peliculas.Add(dummy);
-            }
+            LogicaFiltrosRecomendacion get = new LogicaFiltrosRecomendacion();
+            peliculas = get.getPeliculas(_context);
             return peliculas;
         }
     }
