@@ -13,7 +13,7 @@ namespace MyMovieServer.Models
         public int IdPelicula { get; set; }
         public string NombrePelicula { get; set; }
         public string Director { get; set; }
-        public int AnoPelicula { get; set; }
+        public string AnoPelicula { get; set; }
         public int IdGenero { get; set; }
         public int IdIdioma { get; set; }
         public decimal? NotaImdb { get; set; }

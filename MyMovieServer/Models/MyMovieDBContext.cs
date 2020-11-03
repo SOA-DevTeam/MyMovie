@@ -120,6 +120,10 @@ namespace MyMovieServer.Models
 
                 entity.Property(e => e.IdPelicula).HasColumnName("idPelicula");
 
+                entity.Property(e => e.AnoPelicula)
+                    .HasMaxLength(4)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Director)
                     .IsRequired()
                     .HasMaxLength(30)
