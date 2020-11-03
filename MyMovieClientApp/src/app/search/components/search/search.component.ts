@@ -20,10 +20,10 @@ movies: Object;
   searchMovie(){
     
     const name = this.name;
-    if(name == null){
+    if(name == null || name ==""){
       this.message="Debes introducir un nombre o parte del nombre";
     }else{
-      this.message="Buscando"+name;
+      this.message="";
       this.httpService.getMovies(name).subscribe(data =>{
         this.movies=data;
         console.log(this.movies);

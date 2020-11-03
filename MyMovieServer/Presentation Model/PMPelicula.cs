@@ -11,5 +11,6 @@ namespace MyMovieServer.Presentation_Model
         public string NombrePelicula { get; set; }
         public string AnoPelicula { get; set; }
         public string Director { get; set; }
+        public decimal NotaComunidad { get; set; }
     }
 }
