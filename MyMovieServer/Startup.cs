@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MyMovieServer.Models;
+using Newtonsoft.Json.Serialization;
 
 namespace MyMovieServer
 {
