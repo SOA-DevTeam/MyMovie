@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: "newMovie", component: AddMovieComponent }
+  { path: "nuevaPeli", component: AddMovieComponent }
 ];
 
 @NgModule({
