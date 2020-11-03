@@ -1,0 +1,31 @@
+<h2 style="text-align:center;  margin-top: 25px;">Busca tus peliculas favoritas</h2>
+
+<div class="input-group mb-3" style="margin-top: 40px">
+    <div class="input-group-prepend" style="margin-left: 20%">
+      <button class="btn btn-dark" type="button" (click)="searchMovie()">Buscar</button>
+    </div>
+    <input type="text" class="form-control" style="margin-right: 20%;" placeholder="Escribe el nombre de la pelicula" aria-describedby="basic-addon1" [(ngModel)]="name" required>
+  </div>
+<div></div>
+  <p style="color: red; text-align:center">{{message}}</p>
+
+<ng-container>
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Nombre</th>
+                <th>Director</th>
+                <th>Año</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>id</td>
+                <td>Name</td>
+                <td>Director</td>
+                <td>Year</td>
+            </tr>
+        </tbody>
+    </table>
+</ng-container>
