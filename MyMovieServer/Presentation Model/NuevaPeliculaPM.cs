@@ -13,8 +13,8 @@ namespace MyMovieServer.Presentation_Model
         public int genero;
         public int estilo;
         public int idioma;
-        public int mdb;
-        public int meta;
+        public decimal mdb;
+        public decimal meta;
         public bool fav;
         public int pop;
         public string imagen;
