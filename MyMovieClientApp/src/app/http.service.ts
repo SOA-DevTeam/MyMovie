@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class HttpService {
-  searchUrl = 'http://localhost:63546/api/busqueda/';
+  searchUrl = 'https://mymovierest.azurewebsites.net/api/busqueda/';
 
   constructor(private http: HttpClient) { }
 

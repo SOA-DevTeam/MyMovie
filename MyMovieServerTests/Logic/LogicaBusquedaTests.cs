@@ -18,6 +18,7 @@ namespace MyMovieServer.Logic.Tests
             
             var getMovies = new LogicaBusqueda();
             var request = getMovies.getMovies("DummyMovie 2", new MyMovieDBContext());
+            //Primer elemento de la respuesta
             var response = request.ElementAt(0);
 
             //Al existir solo un elemento con ese nombre en la base de datos, se comprueba que sea una lista de un elemento
