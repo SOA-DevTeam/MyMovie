@@ -9,7 +9,7 @@ import { Genero } from './recommendations/models/genero';
 export class HttpService {
 
   constructor(private http: HttpClient) { }
-  BaseURL = 'http://localhost:63546';
+  BaseURL = 'https://mymovierest.azurewebsites.net/';
 
   getAllGen(){
     return this.http.get<Genero[]>(this.BaseURL + "/rf/gen");
