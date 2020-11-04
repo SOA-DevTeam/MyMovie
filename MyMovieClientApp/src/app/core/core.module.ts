@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { AppLayoutComponent } from './layouts/app-layout/app-layout.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -10,7 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [NavMenuComponent, AppLayoutComponent],
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule
   ],
   exports: [
     AppLayoutComponent
