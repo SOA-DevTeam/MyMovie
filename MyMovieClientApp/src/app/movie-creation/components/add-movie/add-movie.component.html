@@ -89,13 +89,20 @@
                 <div class="form-group row">
                     <br>
                     <div class="col">
-                        <button type="submit" [disabled]="!moviesForm.valid" class="btn" id="agbtn"><strong>Agregar Película</strong></button>
+                        <button type="submit" [disabled]="!moviesForm.valid" class="btn" id="agbtn"><strong>Agregar Película</strong>
+                        </button>
+                    </div>
+                    <div class="col-10">
+                        <div class="alert alert-danger" *ngIf="checkFail()" role="alert">
+                            La película ingresada ya se encuentra en nuestro sistema! Intente con otra pelicula.
+                        </div>
                     </div>
                 </div>                 
             </form>
         </div>
         <div class="col rounded" id="div2">
             <p class="h3">Cover de la Película</p>
+            <p>Se recomienda usar una imagen con formato PNG y que el peso de la imagen no supere los 2MB</p>
             <br>
               
             <input type="file" (change)="onChange($event)" id="imageS"/>

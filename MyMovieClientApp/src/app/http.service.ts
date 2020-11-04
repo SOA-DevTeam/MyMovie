@@ -11,6 +11,7 @@ export class HttpService {
   private devURL: string = "http://localhost:63546/";
   private prodURL: string = "https://mymovierest.azurewebsites.net/"
   create: number = -1;
+  postResponse: Object;
 
 
   getGenres() {
@@ -30,8 +31,8 @@ export class HttpService {
     this.http.post((this.devURL + 'nuevaPeli'), postData).subscribe(
       res => {
         console.log(res);
+        this.postResponse = res;
         this.create = res["create"];
       });
-
   }
 }
