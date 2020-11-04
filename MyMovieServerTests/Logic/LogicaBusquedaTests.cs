@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MyMovieServer.Models;
 
 namespace MyMovieServer.Logic.Tests
 {
@@ -14,8 +15,9 @@ namespace MyMovieServer.Logic.Tests
         [TestMethod()]
         public void getMoviesTest()
         {
+            
             var getMovies = new LogicaBusqueda();
-            var request = getMovies.getMovies("DummyMovie 2");
+            var request = getMovies.getMovies("DummyMovie 2", new MyMovieDBContext());
             var response = request.ElementAt(0);
 
             //Al existir solo un elemento con ese nombre en la base de datos, se comprueba que sea una lista de un elemento

@@ -16,18 +16,21 @@ namespace MyMovieServer.Controllers
     [ApiController]
     public class BusquedaController : ControllerBase
     {
-        private readonly LogicaBusqueda logicaBusqueda;
+        private ILogger<BusquedaController> _logger;
+        private MyMovieDBContext _context;
+        private LogicaBusqueda _logicaBusqueda = new LogicaBusqueda();
 
-        public BusquedaController()
+        public BusquedaController(ILogger<BusquedaController> logger,  MyMovieDBContext context)
         {
-            logicaBusqueda = new LogicaBusqueda();
+            _context = context;
+            _logger = logger;
         }
 
         [HttpGet("{name}")]
-        public List<PMPelicula> GetGenero(String name)
+        public List<PeliculaGeneralPM> GetGenero(String name)
         {
             
-            return logicaBusqueda.getMovies(name);
+            return _logicaBusqueda.getMovies(name, _context);
         }
 
     }

@@ -11,15 +11,13 @@ namespace MyMovieServer.Logic
 
     public class LogicaBusqueda
     {
-        private readonly MyMovieDBContext context;
         public LogicaBusqueda()
         {
-            this.context = new MyMovieDBContext();
         }
 
-        public List<PMPelicula> getMovies(string name)
+        public List<PeliculaGeneralPM> getMovies(string name, MyMovieDBContext context)
         {
-            List<PMPelicula> peliculas = new List<PMPelicula>();
+            List<PeliculaGeneralPM> peliculas = new List<PeliculaGeneralPM>();
             var pelicula = (from peli in context.Pelicula
                             join cali in context.Calificacion 
                             on peli.IdPelicula equals cali.IdPelicula into joined
@@ -39,7 +37,7 @@ namespace MyMovieServer.Logic
             int i = 0;
             foreach (var p in pelicula)
             {
-                PMPelicula spelicula = new PMPelicula();
+                PeliculaGeneralPM spelicula = new PeliculaGeneralPM();
                 spelicula.idPelicula = pelicula.ElementAt(i).idPelicula;
                 spelicula.NombrePelicula = pelicula.ElementAt(i).NombrePelicula;
                 spelicula.Director = pelicula.ElementAt(i).Director;

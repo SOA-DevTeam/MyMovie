@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MyMovieServer.Presentation_Model
 {
-    public class PMPelicula
+    public class PeliculaGeneralPM
     {
         public int idPelicula { get; set; }
         public string NombrePelicula { get; set; }

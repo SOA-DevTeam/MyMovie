@@ -22,6 +22,8 @@ movies: Object;
     const name = this.name;
     if(name == null || name ==""){
       this.message="Debes introducir un nombre o parte del nombre";
+    }else if (name.length<4){
+      this.message="Asegurate de ingresar al menos 4 caracteres";
     }else{
       this.message="";
       this.httpService.getMovies(name).subscribe(data =>{
