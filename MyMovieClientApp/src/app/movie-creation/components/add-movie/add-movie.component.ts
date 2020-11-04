@@ -41,7 +41,7 @@ export class AddMovieComponent implements OnInit {
   styleSelected: number;
   genreSelected: number;
   langSelected: number;
-  sysFav = 0;
+  sysFav = false;
   popularity = 0;
 
 
@@ -91,7 +91,7 @@ export class AddMovieComponent implements OnInit {
       meta: this.notaMetaSelected,
       fav: this.sysFav,
       pop: this.popularity,
-      image: this.imageSelected
+      imagen: this.imageSelected
     })
   }
 
@@ -99,6 +99,7 @@ export class AddMovieComponent implements OnInit {
   ngOnInit(): void {
 
     this.imageSelected = "";
+    this.popularity = 0;
     this.styles$ = Array.of(this.http.getStyles().subscribe((data) => (this.styles$ = data)));
     this.langs$ = Array.of(this.http.getLang().subscribe((data) => (this.langs$ = data)));
     this.genres$ = Array.of(this.http.getGenres().subscribe((data) => (this.genres$ = data)));
