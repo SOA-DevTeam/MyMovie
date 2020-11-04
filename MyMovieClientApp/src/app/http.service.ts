@@ -7,11 +7,11 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class HttpService {
-  searchUrl = 'https://mymovierest.azurewebsites.net/api/busqueda/';
+  restUrl = 'https://mymovierest.azurewebsites.net/';
 
   constructor(private http: HttpClient) { }
 
   getMovies(name: string){
-    return this.http.get(this.searchUrl + name);
+    return this.http.get(this.restUrl + 'busquedaPelicula' + name);
   }
 }

@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace MyMovieServer.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("busquedaPelicula")]
     [ApiController]
     public class BusquedaController : ControllerBase
     {
