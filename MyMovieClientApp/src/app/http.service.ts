@@ -1,3 +1,4 @@
+import { PeliculasCalificadas } from './recommendations/models/peliculasCalificadas';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Genero } from './recommendations/models/genero';
@@ -14,8 +15,7 @@ export class HttpService {
     return this.http.get<Genero[]>(this.BaseURL + "/rf/gen");
   }
 
-  getMoviesFilter(){
-    //return this.http.get<>
-
+  getMoviesFilter(idGen : string, comunidad : string, imdb : string, metascore : string, popularidad : string, favorito : string){
+    return this.http.get<PeliculasCalificadas[]>(this.BaseURL + "/rf/get/" + idGen + "/" + comunidad + "/" + imdb + "/" + metascore + "/" + popularidad + "/" + favorito);
   }
 }

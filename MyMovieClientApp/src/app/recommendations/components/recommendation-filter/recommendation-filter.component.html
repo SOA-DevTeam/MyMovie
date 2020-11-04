@@ -9,7 +9,7 @@
         <h2>Filters</h2>
         <label for="">Género: </label>
         <select name="" id="" class="form-control" [(ngModel)] = "genero">
-          <option *ngFor = "let gen of generos" value="">{{ gen.genero1 }}</option>
+          <option [value]="gen.idGenero" *ngFor = "let gen of generos" >{{ gen.genero1 }}</option>
         </select>
         <h5>Categorias:</h5>
         <label for="">IMDB note:</label>
@@ -29,10 +29,10 @@
         <button color="primary" class="btn btn-dark" (click)="filter($event)">Filtrar</button>
       </div>
       <div class="col-lg-8 col-sm-8" style="margin-right: 0%;">
-        <div class="card">
+        <div class="card" *ngFor = "let pel of peliculas">
             <img class="card-img-top" src="67857-flavor-9-article_m-1.jpg" alt="Card image">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title">{{ pel.nombrePelicula }}</h5>
                 <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
             </div>

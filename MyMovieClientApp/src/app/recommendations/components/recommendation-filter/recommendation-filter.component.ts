@@ -1,3 +1,4 @@
+import { PeliculasCalificadas } from './../../models/peliculasCalificadas';
 import { HttpService } from './../../../http.service';
 import { Component, OnInit} from '@angular/core';
 
@@ -37,6 +38,8 @@ export class RecommendationFilterComponent implements OnInit {
 
   genero : number;
 
+  peliculas : PeliculasCalificadas[];
+
   ngOnInit(): void {
       this.httpS.getAllGen().subscribe(result => {
         this.generos = result;
@@ -64,8 +67,17 @@ export class RecommendationFilterComponent implements OnInit {
   filter(event){
     if(this.goodT == 1){
       this.goodF = 1;
+      console.log(this.genero);
     }else{
       this.goodF = -1;
+      this.httpS.getMoviesFilter(this.genero.toString(),
+      this.community.toString(), 
+      this.imdb.toString(),
+      this.metascore.toString(),
+      this.popularity.toString(), 
+      this.platform.toString()).subscribe(result => {
+        this.peliculas = result;
+      }, error => console.error());
     }
   }
 
