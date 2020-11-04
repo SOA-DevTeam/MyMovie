@@ -2,7 +2,7 @@
 
 <div class="input-group mb-3">
     <div class="input-group-prepend">
-      <button class="btn btn-dark" type="button" (click)="searchMovie()" >Buscar</button>
+      <button class="btn btn-dark" id="moviebtn" [disabled]="name==null || name.length<4" type="button" (click)="searchMovie()" >Buscar</button>
     </div>
     <input type="text" class="form-control" placeholder="Escribe el nombre de la pelicula" (keyup.enter)="searchMovie()" aria-describedby="basic-addon1" [(ngModel)]="name" required>
   </div>

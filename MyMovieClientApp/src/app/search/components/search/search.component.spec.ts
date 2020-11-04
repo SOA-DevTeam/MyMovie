@@ -26,16 +26,9 @@ describe('SearchComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have button disabled when no input', () => {
+  it('should have no input when started', () => {
     component.searchMovie();
-    expect(component.message).toBe('Debes introducir un nombre o parte del nombre');
+    expect(component.name).toBe(undefined);
   });
 
-  it('should have error message when not given enough characters to search', () => {
-    component.name = 'aa';
-    component.searchMovie();
-    expect(component.message).toBe('Asegurate de ingresar al menos 4 caracteres');
-  });
-
-  
 });

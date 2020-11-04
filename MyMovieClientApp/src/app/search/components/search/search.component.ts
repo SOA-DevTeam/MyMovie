@@ -15,6 +15,7 @@ export class SearchComponent implements OnInit {
   // tslint:disable-next-line: ban-types
   movies: Object;
 
+
   constructor(public httpService: HttpService) { }
 
   ngOnInit(): void {
@@ -25,18 +26,11 @@ export class SearchComponent implements OnInit {
   searchMovie(){
 
     const name = this.name;
-    // Input validation
-    if (name == null || name === ''){
-      this.message = 'Debes introducir un nombre o parte del nombre';
-    }else if (name.length < 4){
-      this.message = 'Asegurate de ingresar al menos 4 caracteres';
-    }else{
-      this.message = '';
-      this.httpService.getMovies(name).subscribe(data =>{
+    this.message = '';
+    this.httpService.getMovies(name).subscribe(data => {
         this.movies = data;
         console.log(this.movies);
       });
-    }
   }
 
 }
