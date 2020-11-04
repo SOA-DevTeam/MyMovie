@@ -4,6 +4,7 @@ using MyMovieServer.Controllers;
 using MyMovieServer.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace MyMovieServer.Controllers.Tests
@@ -17,7 +18,7 @@ namespace MyMovieServer.Controllers.Tests
             MyMovieDBContext context  = new MyMovieDBContext();
             RecommendationFilterController controller = new RecommendationFilterController(context);
             Console.WriteLine(controller.GetGen()[0].Genero1);
-            Console.WriteLine(controller.GetPeliculas(2, 20, 20, 20, 20)[0]);
+            Console.WriteLine(controller.GetPeliculas(2, 20, 20, 20, 20, 20).ToList()[0].NombrePelicula);
 
         }
     }

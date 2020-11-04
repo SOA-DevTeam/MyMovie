@@ -24,7 +24,7 @@ namespace MyMovieServer.Controllers
             _context = context;
         }
         [HttpGet("get/{gen}/{comunidad}/{imdb}/{metascore}/{popularidad}/{favorito}")]
-        public IEnumerable<CalificacionesDePelicula> GetPeliculas(int gen, int comunidad, decimal imdb, decimal favorito, decimal metascore, decimal popularidad)
+        public IEnumerable<CalificacionesDePelicula> GetPeliculas(int gen, decimal comunidad, decimal imdb, decimal favorito, decimal metascore, decimal popularidad)
         {
             List<CalificacionesDePelicula> calificaciones = new List<CalificacionesDePelicula>();
             LogicaFiltrosRecomendacion get = new LogicaFiltrosRecomendacion();
@@ -35,11 +35,11 @@ namespace MyMovieServer.Controllers
             {
                 cal = get.notacomunidad(pel.IdPelicula, _context);
                 pel.Calificacion = cal;
-                pel.Total = pel.Calificacion * (Convert.ToDecimal(comunidad) * 0.01m) +
+                pel.Total = pel.Calificacion * (comunidad * 0.01m) +
                     pel.NotaMetascore * (metascore * 0.01m) +
                     pel.NotaImdb * (imdb * 0.01m) +
-                    (Convert.ToInt32(pel.Favorito) * 10) * (favorito * 0.01m);
-                //+ pel.IndicePopularidad * (popularidad * 0.01m);
+                    (Convert.ToInt32(pel.Favorito) * 10) * (favorito * 0.01m)
+                    + pel.IndicePopularidad * (popularidad * 0.01m);
                 calificacionesPel.Add(pel);
             }
             IEnumerable<CalificacionesDePelicula> peliculaCalificadas =

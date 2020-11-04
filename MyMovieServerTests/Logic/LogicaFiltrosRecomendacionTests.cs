@@ -13,10 +13,9 @@ namespace MyMovieServer.Logic.Tests
         [TestMethod()]
         public void notacomunidadTest()
         {
-            //MyMovieDBContext context = new MyMovieDBContext();
-            //LogicaFiltrosRecomendacion controller = new LogicaFiltrosRecomendacion();
-            //Console.WriteLine(controller.notacomunidad(1,context));
-            Console.WriteLine(Convert.ToDecimal(true));
+            MyMovieDBContext context = new MyMovieDBContext();
+            LogicaFiltrosRecomendacion controller = new LogicaFiltrosRecomendacion();
+            Console.WriteLine(controller.notacomunidad(1,context));
         }
     }
 }
