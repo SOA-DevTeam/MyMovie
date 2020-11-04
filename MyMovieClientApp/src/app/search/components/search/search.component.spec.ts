@@ -25,7 +25,7 @@ describe('SearchComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
+  // No input text when started
   it('should have no input when started', () => {
     component.searchMovie();
     expect(component.name).toBe(undefined);
