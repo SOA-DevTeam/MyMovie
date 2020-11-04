@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MyMovieServer.Logic
@@ -16,8 +17,8 @@ namespace MyMovieServer.Logic
         {
             List<CalificacionesDePelicula> peliculas = new List<CalificacionesDePelicula>();
             foreach (Pelicula pelicula in context.Pelicula.ToList())
-            {   
-                if(pelicula.IdGenero == id)
+            {
+                if (pelicula.IdGenero == id)
                 {
                     CalificacionesDePelicula dummy = new CalificacionesDePelicula();
                     dummy.IdGenero = pelicula.IdGenero;
@@ -27,11 +28,31 @@ namespace MyMovieServer.Logic
                     dummy.NombrePelicula = pelicula.NombrePelicula;
                     dummy.NotaImdb = pelicula.NotaImdb;
                     dummy.NotaMetascore = pelicula.NotaMetascore;
+                    dummy.Favorito = pelicula.Favorito;
                     peliculas.Add(dummy);
                 }
             }
 
             return peliculas;
+        }
+
+        public decimal notacomunidad(int idPelicula, MyMovieDBContext context)
+        {
+            decimal cal = 0.0m;
+            int contador = 0;
+            foreach(Calificacion c in context.Calificacion.ToList())
+            {
+                if(c.IdPelicula == idPelicula)
+                {
+                    cal += c.Calificacion1;
+                    contador += 1;
+                }
+            }
+            if(contador != 0) { 
+                cal = cal / Convert.ToDecimal(contador);
+            }
+            return cal;
+
         }
 
         public List<Genero> getGen(MyMovieDBContext _context)

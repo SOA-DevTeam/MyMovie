@@ -23,13 +23,39 @@ namespace MyMovieServer.Controllers
         {
             _context = context;
         }
-        [HttpGet("get/{gen}/{imdb}/{metascore}/{popularidad}/{comunida}")]
-        public List<CalificacionesDePelicula> GetPeliculas(int gen, int imdb, int metascore, int popularidad, int comunidad)
+        [HttpGet("get/{gen}/{comunidad}/{imdb}/{metascore}/{popularidad}/{favorito}")]
+        public IEnumerable<CalificacionesDePelicula> GetPeliculas(int gen, int comunidad, decimal imdb, decimal favorito, decimal metascore, decimal popularidad)
         {
             List<CalificacionesDePelicula> calificaciones = new List<CalificacionesDePelicula>();
             LogicaFiltrosRecomendacion get = new LogicaFiltrosRecomendacion();
+            List<CalificacionesDePelicula> calificacionesPel = new List<CalificacionesDePelicula>();
             calificaciones = get.getPeliculas(_context, gen);
-            return calificaciones;
+            decimal cal;
+            foreach (CalificacionesDePelicula pel in calificaciones)
+            {
+                cal = get.notacomunidad(pel.IdPelicula, _context);
+                pel.Calificacion = cal;
+                pel.Total = pel.Calificacion * (Convert.ToDecimal(comunidad) * 0.01m) +
+                    pel.NotaMetascore * (metascore * 0.01m) +
+                    pel.NotaImdb * (imdb * 0.01m) +
+                    (Convert.ToInt32(pel.Favorito) * 10) * (favorito * 0.01m);
+                //+ pel.IndicePopularidad * (popularidad * 0.01m);
+                calificacionesPel.Add(pel);
+            }
+            IEnumerable<CalificacionesDePelicula> peliculaCalificadas =
+                from p in calificacionesPel orderby p.Total descending select p;
+            return peliculaCalificadas;
+        }
+
+        [HttpGet("cal")]
+        public List<Calificacion> getCal()
+        {
+            List<Calificacion> cals = new List<Calificacion>();
+            foreach (Calificacion c in _context.Calificacion.ToList())
+            {
+                cals.Add(c);
+            }
+            return cals;
         }
 
         [HttpGet ("gen")]

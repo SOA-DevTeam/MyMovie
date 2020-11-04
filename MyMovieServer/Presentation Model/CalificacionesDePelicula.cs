@@ -14,6 +14,8 @@ namespace MyMovieServer.Presentation_Model
         public decimal? NotaMetascore { get; set; }
         public string Imagen { get; set; }
         public decimal? IndicePopularidad { get; set; }
-        public decimal? calificacion { get; set; }
+        public decimal? Calificacion { get; set; }
+        public decimal? Total { get; set; }
+        public bool? Favorito { get; set; }
     }
 }
