@@ -1,3 +1,4 @@
+import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -16,9 +17,9 @@ export class AddMovieComponent implements OnInit {
       name: ['', Validators.required],
       director: ['', Validators.required],
       year: ['', Validators.required],
-      // genre: ['', Validators.required],
-      //style: ['', Validators.required],
-      //language: ['', Validators.required],
+      genre: ['', Validators.required],
+      style: ['', Validators.required],
+      language: ['', Validators.required],
       notaMdb: ['', Validators.required],
       notaMeta: ['', Validators.required],
 
@@ -28,12 +29,12 @@ export class AddMovieComponent implements OnInit {
   myimage: Observable<any>;
   Notas: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   moviesForm: FormGroup;
-  styles$: Object;
+  styles$: any;
   genres$: Object;
   langs$: Object;
   notaMDbSelected: number;
   notaMetaSelected: number;
-  imageSelected: string = "";
+  imageSelected: string;
   yearSelected: number;
   nameSelected: string;
   directorSelected: string;
@@ -44,6 +45,7 @@ export class AddMovieComponent implements OnInit {
   popularity = 0;
 
 
+
   onChange($event: Event) {
     const file = ($event.target as HTMLInputElement).files[0];
     this.convertToBase64(file);
@@ -52,6 +54,11 @@ export class AddMovieComponent implements OnInit {
   convertToBase64(file: File) {
     this.myimage = new Observable((subscriber: Subscriber<any>) => {
       this.readFile(file, subscriber);
+    });
+
+    const observable = new Observable((subscriber: Subscriber<any>) => { this.readFile(file, subscriber) });
+    observable.subscribe((d) => {
+      this.imageSelected = d;
     });
   }
 
@@ -70,20 +77,31 @@ export class AddMovieComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.nameSelected)
-    console.log(this.directorSelected);
-    console.log(this.yearSelected)
-    console.log(this.notaMDbSelected)
-    console.log(this.notaMetaSelected)
-    console.log(this.sysFav)
     if (this.yearSelected == 2020) {
       this.popularity = this.popularity + 20
     }
-    console.log(this.popularity)
+    this.http.addMovie({
+      nombre: this.nameSelected,
+      director: this.directorSelected,
+      anno: this.yearSelected,
+      genero: this.genreSelected,
+      estilo: this.styleSelected,
+      idioma: this.langSelected,
+      mdb: this.notaMDbSelected,
+      meta: this.notaMetaSelected,
+      fav: this.sysFav,
+      pop: this.popularity,
+      image: this.imageSelected
+    })
   }
 
 
   ngOnInit(): void {
+
+    this.imageSelected = "";
+    this.styles$ = Array.of(this.http.getStyles().subscribe((data) => (this.styles$ = data)));
+    this.langs$ = Array.of(this.http.getLang().subscribe((data) => (this.langs$ = data)));
+    this.genres$ = Array.of(this.http.getGenres().subscribe((data) => (this.genres$ = data)));
   }
 
 }
