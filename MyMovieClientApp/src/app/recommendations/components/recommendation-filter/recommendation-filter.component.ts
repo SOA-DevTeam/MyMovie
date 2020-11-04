@@ -31,12 +31,13 @@ export class RecommendationFilterComponent implements OnInit {
   total : number = 100;
 
   goodT : number = -1;
+  
 
   goodF : number = -1;
 
   generos : Genero[];
 
-  genero : number;
+  genero : number = 0;
 
   peliculas : PeliculasCalificadas[];
 
@@ -64,7 +65,7 @@ export class RecommendationFilterComponent implements OnInit {
 
     }
 
-  filter(event){
+  filter(){
     if(this.goodT == 1){
       this.goodF = 1;
       console.log(this.genero);
