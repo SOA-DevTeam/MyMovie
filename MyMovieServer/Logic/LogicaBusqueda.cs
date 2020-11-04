@@ -8,13 +8,8 @@ using Microsoft.Extensions.Logging;
 
 namespace MyMovieServer.Logic
 {
-    public interface ILogicaBusqueda
-    {
-        public List<PMPelicula> getMovies(string name);
-        
-    }
 
-    public class LogicaBusqueda : ILogicaBusqueda
+    public class LogicaBusqueda
     {
         private readonly MyMovieDBContext context;
         public LogicaBusqueda()

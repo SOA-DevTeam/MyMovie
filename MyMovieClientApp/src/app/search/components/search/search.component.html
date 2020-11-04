@@ -1,4 +1,4 @@
-<h2 style="text-align:center;  ">Busca tus peliculas favoritas</h2>
+<h2 class="center">Busca tus peliculas favoritas</h2>
 
 <div class="input-group mb-3">
     <div class="input-group-prepend">
@@ -6,25 +6,25 @@
     </div>
     <input type="text" class="form-control" placeholder="Escribe el nombre de la pelicula" (keyup.enter)="searchMovie()" aria-describedby="basic-addon1" [(ngModel)]="name" required>
   </div>
-<div class="warning"> <p class="text-danger">*{{message}}</p> </div>
+<div class="warning"> <p class="text-danger">. {{message}} .</p> </div>
 <ng-container>
     <table class="table">
         <thead class="thead-dark">
             <tr>
                 <th></th>
                 <th>Nombre</th>
-                <th>Director</th>
-                <th>Año</th>
-                <th>Nota de la comunidad</th>
+                <th class="dcenter">Director</th>
+                <th class="dcenter">Año</th>
+                <th class="dcenter">Nota de la comunidad</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let movie of movies">
                 <td></td>
-                <td><a [routerLink]="['search']" routerLinkActive="active">{{movie.nombrePelicula}}</a></td>
-                <td>{{movie.director}}</td>
-                <td>{{movie.anoPelicula}}</td>
-                <td>{{movie.notaComunidad}}</td>
+                <td><a style="text-align: right;">{{movie.nombrePelicula}}</a></td>
+                <td class="dcenter">{{movie.director}}</td>
+                <td class="dcenter">{{movie.anoPelicula}}</td>
+                <td class="dcenter">{{movie.notaComunidad}}</td>
             </tr>
         </tbody>
     </table>
