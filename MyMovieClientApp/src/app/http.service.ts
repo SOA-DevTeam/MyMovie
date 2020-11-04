@@ -12,6 +12,6 @@ export class HttpService {
   constructor(private http: HttpClient) { }
 
   getMovies(name: string){
-    return this.http.get(this.restUrl + 'busquedaPelicula' + name);
+    return this.http.get(this.restUrl + 'busquedaPelicula/' + name);
   }
 }
