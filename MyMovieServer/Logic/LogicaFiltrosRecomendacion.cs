@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using MyMovieServer.Controllers;
 using MyMovieServer.Models;
+using MyMovieServer.Presentation_Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,29 +12,23 @@ namespace MyMovieServer.Logic
 {
     public class LogicaFiltrosRecomendacion
     {
-        public List<Pelicula> getPeliculas(MyMovieDBContext context)
+        public List<CalificacionesDePelicula> getPeliculas(MyMovieDBContext context, int id)
         {
-            List<Pelicula> peliculas = new List<Pelicula>();
+            List<CalificacionesDePelicula> peliculas = new List<CalificacionesDePelicula>();
             foreach (Pelicula pelicula in context.Pelicula.ToList())
-            {
-                Pelicula dummy = new Pelicula();
-                dummy.AnoPelicula = pelicula.AnoPelicula;
-                dummy.Calificacion = pelicula.Calificacion;
-                dummy.Director = pelicula.Director;
-                dummy.Favorito = pelicula.Favorito;
-                dummy.IdEstilo = pelicula.IdEstilo;
-                dummy.IdEstiloNavigation = pelicula.IdEstiloNavigation;
-                dummy.IdGenero = pelicula.IdGenero;
-                dummy.IdGeneroNavigation = pelicula.IdGeneroNavigation;
-                dummy.IdIdioma = pelicula.IdIdioma;
-                dummy.IdIdiomaNavigation = pelicula.IdIdiomaNavigation;
-                dummy.IdPelicula = pelicula.IdPelicula;
-                dummy.Imagen = pelicula.Imagen;
-                dummy.IndicePopularidad = pelicula.IndicePopularidad;
-                dummy.NombrePelicula = pelicula.NombrePelicula;
-                dummy.NotaImdb = pelicula.NotaImdb;
-                dummy.NotaMetascore = pelicula.NotaMetascore;
-                peliculas.Add(dummy);
+            {   
+                if(pelicula.IdGenero == id)
+                {
+                    CalificacionesDePelicula dummy = new CalificacionesDePelicula();
+                    dummy.IdGenero = pelicula.IdGenero;
+                    dummy.IdPelicula = pelicula.IdPelicula;
+                    dummy.Imagen = pelicula.Imagen;
+                    dummy.IndicePopularidad = pelicula.IndicePopularidad;
+                    dummy.NombrePelicula = pelicula.NombrePelicula;
+                    dummy.NotaImdb = pelicula.NotaImdb;
+                    dummy.NotaMetascore = pelicula.NotaMetascore;
+                    peliculas.Add(dummy);
+                }
             }
 
             return peliculas;

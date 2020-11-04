@@ -12,17 +12,12 @@ namespace MyMovieServer.Controllers.Tests
     public class ControladorFiltrosRecomendacionTests
     {
         [TestMethod()]
-        public void GetTest()
-        {
-
-        }
-
-        [TestMethod()]
         public void GetTest1()
         {
-            //ILogger<ControladorFiltrosRecomendacion> = new ILogger();
-            //MyMovieDBContext context  = new MyMovieDBContext();
-            //ControladorFiltrosRecomendacion test = new ControladorFiltrosRecomendacion( logger, context);
+            MyMovieDBContext context  = new MyMovieDBContext();
+            RecommendationFilterController controller = new RecommendationFilterController(context);
+            Console.WriteLine(controller.GetGen()[0].Genero1);
+            Console.WriteLine(controller.GetPeliculas(2, 20, 20, 20, 20)[0].NombrePelicula);
 
         }
     }

@@ -17,34 +17,18 @@ namespace MyMovieServer.Controllers
     [ApiController]
     public class RecommendationFilterController : ControllerBase
     {
-        private readonly ILogger<RecommendationFilterController> _logger;
         private readonly MyMovieDBContext _context;
 
-        public RecommendationFilterController(ILogger<RecommendationFilterController> logger, MyMovieDBContext context)
+        public RecommendationFilterController( MyMovieDBContext context)
         {
-            _logger = logger;
             _context = context;
         }
-        [HttpGet("get")]
-        public List<CalificacionesDePelicula> GetPeliculas(int imdb, int metascore, int popularidad)
+        [HttpGet("get/{gen}/{imdb}/{metascore}/{popularidad}/{comunida}")]
+        public List<CalificacionesDePelicula> GetPeliculas(int gen, int imdb, int metascore, int popularidad, int comunidad)
         {
-            List<Pelicula> peliculas = new List<Pelicula>();
             List<CalificacionesDePelicula> calificaciones = new List<CalificacionesDePelicula>();
             LogicaFiltrosRecomendacion get = new LogicaFiltrosRecomendacion();
-            peliculas = get.getPeliculas(_context);
-            System.Collections.IList list = peliculas;
-            for (int i = 0; i < list.Count; i++)
-            {
-                CalificacionesDePelicula pel = new CalificacionesDePelicula();
-                pel.IdGenero = peliculas[i].IdGenero;
-                pel.IdPelicula = peliculas[i].IdPelicula;
-                pel.Imagen = peliculas[i].Imagen;
-                pel.IndicePopularidad = peliculas[i].IndicePopularidad;
-                pel.NombrePelicula = peliculas[i].NombrePelicula;
-                pel.NotaImdb = peliculas[i].NotaImdb;
-                pel.NotaMetascore = peliculas[i].NotaMetascore;
-                calificaciones.Add(pel);
-            }
+            calificaciones = get.getPeliculas(_context, gen);
             return calificaciones;
         }
 
