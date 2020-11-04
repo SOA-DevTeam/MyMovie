@@ -27,7 +27,7 @@ namespace MyMovieServer.Logic.Tests
             }
             var testCant = cantidad == 11;
 
-            //El primer elemento en la tabla debe ser el Genero Animacion
+            //El primer elemento en la tabla debe ser el Estilo Animacion
             var primerElemento = (consulta.ElementAt(0).nombre == "Animacion");
             //El genero en la posicion 7 de la lista tiene id 5 y corresponde a Documental
             var doc = consulta.ElementAt(6).id == 5 && consulta.ElementAt(6).nombre == "Documental";
