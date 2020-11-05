@@ -12,23 +12,31 @@ namespace MyMovieServer.Logic
     {
         public int AgregarPelicula(NuevaPeliculaPM p, MyMovieDBContext context)
         {
-            Pelicula peli = new Pelicula
+            try
             {
-                NombrePelicula = p.nombre,
-                Director = p.director,
-                AnoPelicula = p.anno.ToString(),
-                IdGenero = p.genero,
-                IdIdioma = p.idioma,
-                NotaImdb = p.mdb,
-                NotaMetascore = p.meta,
-                Favorito = p.fav,
-                Imagen = p.imagen,
-                IdEstilo = p.estilo,
-                IndicePopularidad = p.pop
-            };
-            context.Add(peli);
-            context.SaveChanges();
-            return 1;
+                Pelicula peli = new Pelicula
+                {
+                    NombrePelicula = p.nombre,
+                    Director = p.director,
+                    AnoPelicula = p.anno.ToString(),
+                    IdGenero = p.genero,
+                    IdIdioma = p.idioma,
+                    NotaImdb = p.mdb,
+                    NotaMetascore = p.meta,
+                    Favorito = p.fav,
+                    Imagen = p.imagen,
+                    IdEstilo = p.estilo,
+                    IndicePopularidad = p.pop
+                };
+                context.Add(peli);
+                context.SaveChanges();
+                return 1;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return 0;
+            }
         }
     }
 }

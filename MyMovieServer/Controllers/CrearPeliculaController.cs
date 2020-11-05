@@ -30,17 +30,9 @@ namespace MyMovieServer.Controllers
         [HttpPost()]
         public int PostP(NuevaPeliculaPM data)
         {
-            try
-            {
-                var result = _np.AgregarPelicula(data, _context);
-                Console.WriteLine(result);
-                return result;
-            }
-            catch(Exception e)
-            {
-                return 0;
-            }
+            var result = _np.AgregarPelicula(data, _context);
+            Console.WriteLine(result);
+            return result;
         }
-
     }
 }
