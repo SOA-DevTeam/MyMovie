@@ -19,6 +19,7 @@ namespace MyMovieServer.Presentation_Model
         public decimal NotaComunidad { get; set; }
         public decimal NotaIMDb { get; set; }
         public decimal NotaMetascore { get; set; }
+        public decimal IndicePopularidad { get; set; }
     }
 
 }

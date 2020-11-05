@@ -9,8 +9,6 @@ import { HttpService } from '../../../http.service';
 export class SearchComponent implements OnInit {
   // Movie name updated with the input
   name: string;
-  // Message displayed when input is not right
-  message: string;
   // Object with movies data from the get method
   // tslint:disable-next-line: ban-types
   movies: Object;
@@ -24,13 +22,12 @@ export class SearchComponent implements OnInit {
   // Http method to get movies
   // tslint:disable-next-line: typedef
   searchMovie(){
-
     const name = this.name;
-    this.message = '';
-    this.httpService.getMovies(name).subscribe(data => {
-        this.movies = data;
-        console.log(this.movies);
+    if (name.length > 4){
+      this.httpService.getMovies(name).subscribe(data => {
+      this.movies = data;
       });
+    }
   }
 
 }

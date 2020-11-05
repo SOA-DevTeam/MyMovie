@@ -1,19 +1,33 @@
-<section><h1 style="text-align: center; margin-top: 20px; margin-bottom: 20px">Nombre peli</h1></section>
-
-<div class="media" style="margin-left: 50px; margin-right: 50px">
-    <img src="..." class="align-self-start mr-3" height="500" width="400">
-    <div class="media-body">
-      <h4>Calificacion de la comunidad</h4>
-      <h3> &#11088; 10/10</h3>
-      <h5>IMDb</h5>
-      <h4>9.5</h4>
-      <h5>Metascore</h5>
-      <h4>9.3</h4>
-      <h6>Director:</h6>
-      <h6>Nolan</h6>
-      <h6>Año</h6>
-      <h6>2010</h6>
-      <h6>Genero</h6>
-      <h6>Accion</h6>
+<section><h1 style="text-align: center; margin-top: 20px; margin-bottom: 20px" *ngFor="let movie of movies">{{movie.nombrePelicula}}</h1></section>
+<div class="media" style="margin-left: 70px; margin-right: 70px" *ngFor="let movie of movies">
+    <img src="{{movie.imagen}}" class="align-self-start mr-3" height="500" width="400">
+    <div class="media-body" style="margin-left: 30px;" >
+      <div style="float: left; margin-right: 70px;">
+        <h4>Director:</h4>
+        <h5>{{movie.director}}</h5>
+        <h4>Año:</h4>
+        <h5>{{movie.anoPelicula}}</h5>
+        <h4>Genero:</h4>
+        <h5>{{movie.genero}}</h5>
+        <h4>Idioma:</h4>
+        <h5>{{movie.idioma}}</h5>
+        <h4>Estilo:</h4>
+        <h5>{{movie.estilo}}</h5>
+      </div>
+      <div style="float: left;  margin-left: 50px;">
+        <h4>Calificacion de la comunidad</h4>
+        <h3 style="margin-bottom: 10px;">{{movie.notaComunidad| number:'1.1-1'}}/10</h3>
+        <h5 style="float: left; margin-right: 50px">IMDb</h5>
+        <h5>Metascore</h5>
+        <h4 style="float: left; margin-right: 50px">{{movie.notaIMDb| number:'1.1-1'}}/10</h4>
+        <h4 style="margin-bottom: 10px;">{{movie.notaMetascore| number:'1.1-1'}}/10</h4>
+        <h4>Favorita de la plataforma:</h4>
+        <h5 *ngIf="movie.favorito === true"> &#10004;</h5>
+        <h5 *ngIf="movie.favorito === false"> &#10060;</h5>
+        <h4>Indice de popularidad:</h4>
+        <h5>{{movie.indicePopularidad}}</h5>
+      </div>      
     </div>
   </div>
+
+  

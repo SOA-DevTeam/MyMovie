@@ -15,4 +15,8 @@ export class HttpService {
   getMovies(name: string){
     return this.http.get(this.testUrl + 'busquedaPelicula/' + name);
   }
+
+  getMovie(id: string){
+    return this.http.get(this.testUrl + 'pelicula/' + id);
+  }
 }

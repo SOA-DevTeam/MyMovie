@@ -25,7 +25,7 @@ namespace MyMovieServer.Controllers
             _logger = logger;
         }
         [HttpGet("{id}")]
-        public PerfilPeliculaPM GetGenero(int id)
+        public List<PerfilPeliculaPM> GetGenero(int id)
         {
 
             return _logicaPelicula.GetMovie(id, _context);

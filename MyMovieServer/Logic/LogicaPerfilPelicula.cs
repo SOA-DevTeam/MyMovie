@@ -10,9 +10,9 @@ namespace MyMovieServer.Logic
     public class LogicaPerfilPelicula
     {
 
-        public PerfilPeliculaPM GetMovie(int id, MyMovieDBContext context)
+        public List<PerfilPeliculaPM> GetMovie(int id, MyMovieDBContext context)
         {
-            PerfilPeliculaPM peliculas = new PerfilPeliculaPM();
+            List<PerfilPeliculaPM> peliculas = new List<PerfilPeliculaPM>();
             var pelicula = (from peli in context.Pelicula
                             join gene in context.Genero
                             on peli.IdGenero equals gene.IdGenero
@@ -26,7 +26,7 @@ namespace MyMovieServer.Logic
                             where peli.IdPelicula==id
                             group joi by new { peli.IdPelicula, peli.NombrePelicula, 
                                 peli.Director, peli.AnoPelicula, peli.Favorito, peli.NotaImdb, 
-                                peli.NotaMetascore, gene.Genero1, idio.Idioma1, esti.Estilo1, peli.Imagen  } into gr
+                                peli.NotaMetascore, gene.Genero1, idio.Idioma1, esti.Estilo1, peli.Imagen, peli.IndicePopularidad  } into gr
                             select new
                             {
                                 idPelicula = gr.Key.IdPelicula,
@@ -40,26 +40,33 @@ namespace MyMovieServer.Logic
                                 Favorito = gr.Key.Favorito,
                                 NotaIMDb = gr.Key.NotaImdb,
                                 NotaMetascore = gr.Key.NotaMetascore,
+                                IndicePopularidad = gr.Key.IndicePopularidad,
                                 Promedio = gr.Average(x => x.Calificacion1)
                             }).ToList();
 
 
-            
-            PerfilPeliculaPM spelicula = new PerfilPeliculaPM();
-            spelicula.idPelicula = pelicula.ElementAt(0).idPelicula;
-            spelicula.NombrePelicula = pelicula.ElementAt(0).NombrePelicula;
-            spelicula.Director = pelicula.ElementAt(0).Director;
-            spelicula.AnoPelicula = pelicula.ElementAt(0).AnoPelicula;
-            spelicula.Genero = pelicula.ElementAt(0).Genero;
-            spelicula.Idioma = pelicula.ElementAt(0).Genero;
-            spelicula.Imagen = pelicula.ElementAt(0).Imagen;
-            spelicula.Estilo = pelicula.ElementAt(0).Estilo;
-            spelicula.Favorito = (bool)pelicula.ElementAt(0).Favorito;
-            spelicula.NotaIMDb = (decimal)pelicula.ElementAt(0).NotaIMDb;
-            spelicula.NotaMetascore = (decimal)pelicula.ElementAt(0).NotaMetascore;
-            spelicula.NotaComunidad = pelicula.ElementAt(0).Promedio;
-            
-            return spelicula;
+            int i = 0;
+            foreach (var p in pelicula) { 
+
+                PerfilPeliculaPM spelicula = new PerfilPeliculaPM();
+                spelicula.idPelicula = pelicula.ElementAt(i).idPelicula;
+                spelicula.NombrePelicula = pelicula.ElementAt(i).NombrePelicula;
+                spelicula.Director = pelicula.ElementAt(i).Director;
+                spelicula.AnoPelicula = pelicula.ElementAt(i).AnoPelicula;
+                spelicula.Genero = pelicula.ElementAt(i).Genero;
+                spelicula.Idioma = pelicula.ElementAt(i).Idioma;
+                spelicula.Imagen = pelicula.ElementAt(i).Imagen;
+                spelicula.Estilo = pelicula.ElementAt(i).Estilo;
+                spelicula.Favorito = (bool)pelicula.ElementAt(i).Favorito;
+                spelicula.NotaIMDb = (decimal)pelicula.ElementAt(i).NotaIMDb;
+                spelicula.NotaMetascore = (decimal)pelicula.ElementAt(i).NotaMetascore;
+                spelicula.NotaComunidad = pelicula.ElementAt(i).Promedio;
+                spelicula.IndicePopularidad = (decimal)pelicula.ElementAt(i).IndicePopularidad;
+                peliculas.Add(spelicula);
+                i++;
+
+            }
+            return peliculas;
         }
     }
 
