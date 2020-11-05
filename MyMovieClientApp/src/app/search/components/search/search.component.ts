@@ -13,6 +13,8 @@ export class SearchComponent implements OnInit {
   // tslint:disable-next-line: ban-types
   movies: Object;
 
+  loading: boolean;
+
 
   constructor(public httpService: HttpService) { }
 
@@ -24,9 +26,11 @@ export class SearchComponent implements OnInit {
   searchMovie(){
     const name = this.name;
     if (name.length > 4){
+      this.loading = true;
       this.httpService.getMovies(name).subscribe(data => {
       this.movies = data;
-      });
+      this.loading = false;
+    });
     }
   }
 

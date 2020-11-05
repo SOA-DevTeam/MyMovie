@@ -1,33 +1,70 @@
 <section><h1 style="text-align: center; margin-top: 20px; margin-bottom: 20px" *ngFor="let movie of movies">{{movie.nombrePelicula}}</h1></section>
+<section>
 <div class="media" style="margin-left: 70px; margin-right: 70px" *ngFor="let movie of movies">
     <img src="{{movie.imagen}}" class="align-self-start mr-3" height="500" width="400">
     <div class="media-body" style="margin-left: 30px;" >
       <div style="float: left; margin-right: 70px;">
         <h4>Director:</h4>
         <h5>{{movie.director}}</h5>
+        <br>
         <h4>Año:</h4>
         <h5>{{movie.anoPelicula}}</h5>
+        <br>
         <h4>Genero:</h4>
         <h5>{{movie.genero}}</h5>
+        <br>
         <h4>Idioma:</h4>
         <h5>{{movie.idioma}}</h5>
+        <br>
         <h4>Estilo:</h4>
         <h5>{{movie.estilo}}</h5>
+        <br>
+        <button type="button" class="btn btn-dark">Editar Informacion</button>
       </div>
       <div style="float: left;  margin-left: 50px;">
         <h4>Calificacion de la comunidad</h4>
-        <h3 style="margin-bottom: 10px;">{{movie.notaComunidad| number:'1.1-1'}}/10</h3>
-        <h5 style="float: left; margin-right: 50px">IMDb</h5>
-        <h5>Metascore</h5>
-        <h4 style="float: left; margin-right: 50px">{{movie.notaIMDb| number:'1.1-1'}}/10</h4>
-        <h4 style="margin-bottom: 10px;">{{movie.notaMetascore| number:'1.1-1'}}/10</h4>
-        <h4>Favorita de la plataforma:</h4>
-        <h5 *ngIf="movie.favorito === true"> &#10004;</h5>
-        <h5 *ngIf="movie.favorito === false"> &#10060;</h5>
-        <h4>Indice de popularidad:</h4>
-        <h5>{{movie.indicePopularidad}}</h5>
+        <div class="scorebox">
+          <h3 *ngIf="movie.notaComunidad > 8.9" class="great-score">{{movie.notaComunidad| number:'1.1-1'}}</h3>
+          <h3 *ngIf="movie.notaComunidad < 9 && movie.notaComunidad > 7.9 " class="good-score">{{movie.notaComunidad| number:'1.1-1'}}</h3>
+          <h3 *ngIf="movie.notaComunidad < 8 && movie.notaComunidad > 6.9 " class="notsogood-score">{{movie.notaComunidad| number:'1.1-1'}}</h3>
+          <h3 *ngIf="movie.notaComunidad < 7 && movie.notaComunidad > 6.4 " class="medium-score">{{movie.notaComunidad| number:'1.1-1'}}</h3>
+          <h3 *ngIf="movie.notaComunidad < 6.5 && movie.notaComunidad > 5 " class="notsobad-score">{{movie.notaComunidad| number:'1.1-1'}}</h3>
+          <h3 *ngIf="movie.notaComunidad < 5.1" class="bad-score">{{movie.notaComunidad| number:'1.1-1'}}</h3>    
+        </div>
+        <div style="float: left; margin-right: 40px;">
+          <h5 >IMDb</h5>
+          <h4 *ngIf="movie.notaIMDb > 8.9" class="tgreat-score">{{movie.notaIMDb| number:'1.1-1'}}</h4>
+          <h4 *ngIf="movie.notaIMDb < 9 && movie.notaIMDb > 7.9" class="tgood-score">{{movie.notaIMDb| number:'1.1-1'}}</h4>
+          <h4 *ngIf="movie.notaIMDb < 8 && movie.notaIMDb > 6.9" class="tnotsogood-score">{{movie.notaIMDb| number:'1.1-1'}}</h4>
+          <h4 *ngIf="movie.notaIMDb < 7 && movie.notaIMDb > 6.4" class="tmedium-score">{{movie.notaIMDb| number:'1.1-1'}}</h4>
+          <h4 *ngIf="movie.notaIMDb < 6.5 && movie.notaIMDb > 5" class="tnotsobad-score">{{movie.notaIMDb| number:'1.1-1'}}</h4>
+          <h4 *ngIf="movie.notaIMDb < 5.1" class="tbad-score">{{movie.notaIMDb| number:'1.1-1'}}</h4>
+        </div>
+        <div>
+          <h5>Metascore</h5>
+          <h4 *ngIf="movie.notaMetascore > 8.9" class="tgreat-score">{{movie.notaIMDb| number:'1.1-1'}}</h4>
+          <h4 *ngIf="movie.notaMetascore < 9 && movie.notaMetascore > 7.9" class="tgood-score">{{movie.notaMetascore| number:'1.1-1'}}</h4>
+          <h4 *ngIf="movie.notaMetascore < 8 && movie.notaMetascore > 6.9" class="tnotsogood-score">{{movie.notaMetascore| number:'1.1-1'}}</h4>
+          <h4 *ngIf="movie.notaMetascore < 7 && movie.notaMetascore > 6.4" class="tmedium-score">{{movie.notaMetascore| number:'1.1-1'}}</h4>
+          <h4 *ngIf="movie.notaMetascore < 6.5 && movie.notaMetascore > 5" class="tnotsobad-score">{{movie.notaMetascore| number:'1.1-1'}}</h4>
+          <h4 *ngIf="movie.notaMetascore < 5.1" class="tbad-score">{{movie.notaMetascore| number:'1.1-1'}}</h4>
+        </div>
+        <div style="margin-bottom: 30px;">
+          <h5 *ngIf="movie.favorito === true">Favorita de la plataforma: &#11088;</h5>
+        <h5 *ngIf="movie.favorito === false">Favorita de la plataforma: &#10060;</h5>
+        <h5>Indice de popularidad: {{movie.indicePopularidad}}</h5>
+        <br>
+        <h5>¿Qué te pareció la película?</h5>
+        <h5>**********</h5>
+        <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Escribe un comentario"></textarea>
+        <br>
+        <button type="button" class="btn btn-dark">Enviar</button>
+      </div>
       </div>      
     </div>
   </div>
-
+</section>
+<section *ngIf="loading==false">
+  <h1 style="text-align: center; margin-top: 20px;">La comunidad opinó:</h1>
+</section>
   
