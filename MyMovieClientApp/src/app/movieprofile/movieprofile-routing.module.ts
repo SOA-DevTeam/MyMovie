@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MovieprofileComponent } from './components/movieprofile/movieprofile.component';
 
 const routes: Routes = [
-  {path: 'movie', component: MovieprofileComponent}
+  {path: 'movie/:id', component: MovieprofileComponent}
 ];
 
 @NgModule({

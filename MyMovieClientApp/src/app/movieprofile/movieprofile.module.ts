@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { MovieprofileRoutingModule } from './movieprofile-routing.module';
-import { MovieprofileComponent } from './movieprofile/movieprofile.component';
+import { MovieprofileComponent } from './components/movieprofile/movieprofile.component';
 
 
 @NgModule({

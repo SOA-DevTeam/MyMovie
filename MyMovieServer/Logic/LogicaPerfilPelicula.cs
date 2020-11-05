@@ -26,7 +26,7 @@ namespace MyMovieServer.Logic
                             where peli.IdPelicula==id
                             group joi by new { peli.IdPelicula, peli.NombrePelicula, 
                                 peli.Director, peli.AnoPelicula, peli.Favorito, peli.NotaImdb, 
-                                peli.NotaMetascore, gene.Genero1, idio.Idioma1, esti.Estilo1  } into gr
+                                peli.NotaMetascore, gene.Genero1, idio.Idioma1, esti.Estilo1, peli.Imagen  } into gr
                             select new
                             {
                                 idPelicula = gr.Key.IdPelicula,
@@ -35,6 +35,7 @@ namespace MyMovieServer.Logic
                                 AnoPelicula = gr.Key.AnoPelicula,
                                 Genero = gr.Key.Genero1,
                                 Idioma = gr.Key.Idioma1,
+                                Imagen = gr.Key.Imagen,
                                 Estilo = gr.Key.Estilo1,
                                 Favorito = gr.Key.Favorito,
                                 NotaIMDb = gr.Key.NotaImdb,
@@ -43,9 +44,7 @@ namespace MyMovieServer.Logic
                             }).ToList();
 
 
-            //int i = 0;
-            //foreach (var p in pelicula)
-            //{
+            
             PerfilPeliculaPM spelicula = new PerfilPeliculaPM();
             spelicula.idPelicula = pelicula.ElementAt(0).idPelicula;
             spelicula.NombrePelicula = pelicula.ElementAt(0).NombrePelicula;
@@ -53,14 +52,13 @@ namespace MyMovieServer.Logic
             spelicula.AnoPelicula = pelicula.ElementAt(0).AnoPelicula;
             spelicula.Genero = pelicula.ElementAt(0).Genero;
             spelicula.Idioma = pelicula.ElementAt(0).Genero;
+            spelicula.Imagen = pelicula.ElementAt(0).Imagen;
             spelicula.Estilo = pelicula.ElementAt(0).Estilo;
             spelicula.Favorito = (bool)pelicula.ElementAt(0).Favorito;
             spelicula.NotaIMDb = (decimal)pelicula.ElementAt(0).NotaIMDb;
             spelicula.NotaMetascore = (decimal)pelicula.ElementAt(0).NotaMetascore;
             spelicula.NotaComunidad = pelicula.ElementAt(0).Promedio;
-            //peliculas.Add(spelicula);
-            //i++;
-            //}
+            
             return spelicula;
         }
     }

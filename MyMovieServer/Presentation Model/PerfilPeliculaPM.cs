@@ -14,6 +14,7 @@ namespace MyMovieServer.Presentation_Model
         public string Genero { get; set; }
         public string Idioma { get; set; }
         public string Estilo { get; set; }
+        public string Imagen { get; set; }
         public bool Favorito { get; set; }
         public decimal NotaComunidad { get; set; }
         public decimal NotaIMDb { get; set; }
