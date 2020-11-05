@@ -8,10 +8,11 @@ import { map } from 'rxjs/operators';
 })
 export class HttpService {
   restUrl = 'https://mymovierest.azurewebsites.net/';
+  testUrl = 'http://localhost:63546/';
 
   constructor(private http: HttpClient) { }
 
   getMovies(name: string){
-    return this.http.get(this.restUrl + 'busquedaPelicula/' + name);
+    return this.http.get(this.testUrl + 'busquedaPelicula/' + name);
   }
 }

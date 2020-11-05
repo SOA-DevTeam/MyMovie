@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 import { SearchModule } from './search/search.module';
+import { MovieprofileModule } from './movieprofile/movieprofile.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { SearchModule } from './search/search.module';
     AppRoutingModule,
     CoreModule,
     HttpClientModule,
-    SearchModule
+    SearchModule,
+    MovieprofileModule
   ],
   providers: [],
   bootstrap: [AppComponent]
