@@ -133,6 +133,7 @@ export class AddMovieComponent implements OnInit {
       this.popularity = this.popularity + 20
     }
     if (this.sysFav == "Sí") {
+      his.popularity = this.popularity + 20;
       this.favSelected = true;
     }
     else {
