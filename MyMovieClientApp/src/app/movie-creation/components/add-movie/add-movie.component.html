@@ -1,0 +1,129 @@
+<div class="contaniner-xl">
+    <div class="jumbotron jumbotron-fluid rounded" id="jumboAD">
+        <div class="container">
+          <h1 class="display-1">Añadir Película</h1>
+          <p class="h3">¿No encuentras tu película favorita en nuestro sistema?</p>
+          <p class="h5">Ayudanos a extender nuestro catálogo de películas :)</p>
+          <p class="lead"> Llena los campos presentados a continuación con la información de la película que deseas agregar.</p>
+          <br>
+          <hr class="my-4">
+          <blockquote class="blockquote text-center">
+            <p class="mb-0">You now what they call a Quarter Pounder with Cheese in France?</p>
+            <footer class="blockquote-footer">Jules Winnfield, <cite title="Source Title">Pulp Fiction</cite></footer>
+          </blockquote>
+        </div>
+      </div>
+</div>
+<div class="container-fluid rounded" id="divwrap">
+    <div class="row">
+        <div class="col rounded" id="div1">
+            <form [formGroup]="moviesForm" (ngSubmit)="onSubmit()">
+                <p class="h3">Datos de la Película</p>
+                <br>
+                <div class="form-group row">
+                    <label for="MovieName" class="col-5 col-form-label text-center">Nombre de la Pelicula:</label>
+                    <div class="col">
+                      <input type="text" class="form-control" formControlName="name" id="MovieName" [(ngModel)]="nameSelected">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="DirectorName" class="col-5 col-form-label text-center">Director de la Pelicula:</label>
+                    <div class="col">
+                      <input type="text" class="form-control" formControlName="director" id="DirectorName" [(ngModel)]="directorSelected">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Year" class="col-5 col-form-label text-center">Año de Lanzamiento:</label>
+                    <div class="col">
+                        <input   oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                        type = "number"
+                        maxlength = "4" class="form-control" formControlName="year" [(ngModel)]="yearSelected" id="Year">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="GenreSelector" class="col-5 col-form-label text-center">Género:</label>
+                    <div class="col">
+                        <select class="form-control" id="GenraSelector" formControlName="genre" name="gSelector"  [(ngModel)]="genreSelected" required>
+                            <option value="" disabled>Escoja un Género</option>
+                            <option *ngFor="let gn of genres$"  [ngValue]="gn.id">{{gn.nombre}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="LangSelector" class="col-5 col-form-label text-center">Idioma:</label>
+                    <div class="col">
+                        <select class="form-control" formControlName="language" id="LangSelector" name="lSelector" [(ngModel)]="langSelected" required>
+                            <option value="" disabled>Escoja un Idioma</option>
+                            <option *ngFor="let la of langs$" [ngValue]="la.id">{{la.nombre}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="StyleSelector" class="col-5 col-form-label text-center">Estilo de la Película:</label>
+                    <div class="col">
+                        <select class="form-control" formControlName="style" id="StyleSelector" name="sSelector" [(ngModel)]="styleSelected" required>
+                            <option value="" disabled>Escoja un Estilo</option>
+                            <option *ngFor="let st of styles$" [ngValue]="st.id">{{st.nombre}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="MdbSelector" class="col-5 col-form-label text-center">Nota MDb:</label>
+                    <div class="col">
+                        <select class="form-control " formControlName="notaMdb" id="mdbSelector"  [(ngModel)]="notaMDbSelected" name="mSelector" required>
+                            <option value="" disabled>Nota Mdb</option>
+                            <option *ngFor="let nota of Notas" [ngValue]="nota">{{nota}}</option>
+                        </select>
+                    </div>
+                </div> 
+                <div class="form-group row">
+                    <label for="metaSelector" class="col-5 col-form-label text-center">Nota Metascore:</label>
+                    <div class="col">
+                        <select class="form-control" formControlName="notaMeta" id="metaSelector"  [(ngModel)]="notaMetaSelected" name="meSelector" required>
+                            <option value="" disabled>Nota Metascore</option>
+                            <option *ngFor="let nota of Notas" [ngValue]="nota">{{nota}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="favSelector" class="col-5 col-form-label text-center">Favorita de la Plataforma?:</label>
+                    <div class="col">
+                        <select class="form-control " formControlName="fav" id="favSelector"  [(ngModel)]="sysFav" name="fSelector" required>
+                            <option value="" disabled>Opciones</option>
+                            <option *ngFor="let f of Favs" [ngValue]="f">{{f}}</option>
+                        </select>
+                    </div>
+                </div> 
+                <br>
+                <div class="form-group row">
+                    <br>
+                    <div class="col">
+                        <button type="submit" [disabled]="!moviesForm.valid" class="btn" id="agbtn"><strong>Agregar Película</strong>
+                        </button>
+                    </div>
+                    <div class="col-10">
+                        <div class="alert alert-danger" *ngIf="postStatus == 404" role="alert">
+                            La película ingresada ya se encuentra en nuestro sistema! Intente con otra pelicula.
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div class="alert alert-success" *ngIf="postStatus == 200" role="alert">
+                            La película se ha agregado correctamente en nuestro sistema en nuestro sistema!
+                        </div>
+                    </div>
+                </div>                 
+            </form>
+        </div>
+        <div class="col rounded" id="div2">
+            <p class="h3">Cover de la Película</p>
+            <p>Se recomienda usar una imagen con formato PNG y que el peso de la imagen no supere los 2MB</p>
+            <br>
+              
+            <input type="file" (change)="onChange($event)" id="imageS"/>
+            <br>
+            <div class="container" *ngIf="myimage">
+            <img [src]="myimage | async" width="350px" height="450px" alt="" />
+            </div>
+        </div>
+    </div>
+</div>
