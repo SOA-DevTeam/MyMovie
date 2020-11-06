@@ -25,7 +25,7 @@ namespace MyMovieServer.Logic.Tests
             {
                 cantidad += 1;
             }
-            var testCant = cantidad == 11;
+            var testCant = cantidad == 12;
 
             //El primer elemento en la tabla debe ser el Estilo Animacion
             var primerElemento = (consulta.ElementAt(0).nombre == "Animacion");

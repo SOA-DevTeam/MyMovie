@@ -9,11 +9,10 @@ import { HttpService } from '../../../http.service';
 export class SearchComponent implements OnInit {
   // Movie name updated with the input
   name: string;
-  // Message displayed when input is not right
-  message: string;
   // Object with movies data from the get method
   // tslint:disable-next-line: ban-types
   movies: Object;
+  loading: boolean;
 
 
   constructor(public httpService: HttpService) { }
@@ -24,13 +23,13 @@ export class SearchComponent implements OnInit {
   // Http method to get movies
   // tslint:disable-next-line: typedef
   searchMovie(){
-
     const name = this.name;
-    this.message = '';
+    this.loading = true;
     this.httpService.getMovies(name).subscribe(data => {
-        this.movies = data;
-        console.log(this.movies);
-      });
+    this.movies = data;
+    this.loading = false;
+    });
+
   }
 
 }

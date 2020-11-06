@@ -13,11 +13,11 @@ namespace MyMovieServer.Logic.Tests
     public class LogicaBusquedaTests
     {
         [TestMethod()]
-        public void getMoviesTest()
+        public void GetPeliculasTest()
         {
             
             var getMovies = new LogicaBusqueda();
-            var request = getMovies.getMovies("DummyMovie 2", new MyMovieDBContext());
+            var request = getMovies.GetPeliculas("DummyMovie 2", new MyMovieDBContext());
             //Primer elemento de la respuesta
             var response = request.ElementAt(0);
 

@@ -1,0 +1,115 @@
+<section>
+  <h1 class="movietitle" *ngFor="let movie of movies">{{movie.nombrePelicula}}</h1>
+</section>
+<section>
+<div class="media" *ngFor="let movie of movies">
+    <img src="{{movie.imagen}}" class="align-self-start mr-3" height="530" width="400">
+    <h1 *ngIf="movie==undefined">La pelicula no existe</h1>
+    <div class="media-body" >
+      <div class="leftbox">
+        <h4>Director:</h4>
+        <h5>{{movie.director}}</h5>
+        <br>
+        <h4>Año:</h4>
+        <h5>{{movie.anoPelicula}}</h5>
+        <br>
+        <h4>Genero:</h4>
+        <h5>{{movie.genero}}</h5>
+        <br>
+        <h4>Idioma:</h4>
+        <h5>{{movie.idioma}}</h5>
+        <br>
+        <h4>Estilo:</h4>
+        <h5>{{movie.estilo}}</h5>
+        <br>
+        <br>
+        <button type="button" class="btn btn-dark">Editar Informacion</button>
+      </div>
+      <div class="rightbox">
+        <h4>Calificacion de la comunidad</h4>
+        <div class="scorebox">
+          <h3 *ngIf="movie.notaComunidad > 8.9" class="great-score">{{movie.notaComunidad| number:'1.1-1'}}</h3>
+          <h3 *ngIf="movie.notaComunidad < 9 && movie.notaComunidad > 7.9 " class="good-score">{{movie.notaComunidad| number:'1.1-1'}}</h3>
+          <h3 *ngIf="movie.notaComunidad < 8 && movie.notaComunidad > 6.9 " class="notsogood-score">{{movie.notaComunidad| number:'1.1-1'}}</h3>
+          <h3 *ngIf="movie.notaComunidad < 7 && movie.notaComunidad > 6.4 " class="medium-score">{{movie.notaComunidad| number:'1.1-1'}}</h3>
+          <h3 *ngIf="movie.notaComunidad < 6.5 && movie.notaComunidad > 5 " class="notsobad-score">{{movie.notaComunidad| number:'1.1-1'}}</h3>
+          <h3 *ngIf="movie.notaComunidad < 5.1" class="bad-score">{{movie.notaComunidad| number:'1.1-1'}}</h3>    
+        </div>
+        <div class="secondscore">
+          <h5 >IMDb</h5>
+          <h4 *ngIf="movie.notaIMDb > 8.9" class="tgreat-score">{{movie.notaIMDb| number:'1.1-1'}}</h4>
+          <h4 *ngIf="movie.notaIMDb < 9 && movie.notaIMDb > 7.9" class="tgood-score">{{movie.notaIMDb| number:'1.1-1'}}</h4>
+          <h4 *ngIf="movie.notaIMDb < 8 && movie.notaIMDb > 6.9" class="tnotsogood-score">{{movie.notaIMDb| number:'1.1-1'}}</h4>
+          <h4 *ngIf="movie.notaIMDb < 7 && movie.notaIMDb > 6.4" class="tmedium-score">{{movie.notaIMDb| number:'1.1-1'}}</h4>
+          <h4 *ngIf="movie.notaIMDb < 6.5 && movie.notaIMDb > 5" class="tnotsobad-score">{{movie.notaIMDb| number:'1.1-1'}}</h4>
+          <h4 *ngIf="movie.notaIMDb < 5.1" class="tbad-score">{{movie.notaIMDb| number:'1.1-1'}}</h4>
+        </div>
+        <div>
+          <h5>Metascore</h5>
+          <h4 *ngIf="movie.notaMetascore > 8.9" class="tgreat-score">{{movie.notaMetascore| number:'1.1-1'}}</h4>
+          <h4 *ngIf="movie.notaMetascore < 9 && movie.notaMetascore > 7.9" class="tgood-score">{{movie.notaMetascore| number:'1.1-1'}}</h4>
+          <h4 *ngIf="movie.notaMetascore < 8 && movie.notaMetascore > 6.9" class="tnotsogood-score">{{movie.notaMetascore| number:'1.1-1'}}</h4>
+          <h4 *ngIf="movie.notaMetascore < 7 && movie.notaMetascore > 6.4" class="tmedium-score">{{movie.notaMetascore| number:'1.1-1'}}</h4>
+          <h4 *ngIf="movie.notaMetascore < 6.5 && movie.notaMetascore > 5" class="tnotsobad-score">{{movie.notaMetascore| number:'1.1-1'}}</h4>
+          <h4 *ngIf="movie.notaMetascore < 5.1" class="tbad-score">{{movie.notaMetascore| number:'1.1-1'}}</h4>
+        </div>
+        <div class="favorite">
+          <h5 *ngIf="movie.favorito === true">Favorita de la plataforma: &#11088;</h5>
+        <h5 *ngIf="movie.favorito === false">Favorita de la plataforma: &#10060;</h5>
+        <h5>Indice de popularidad: {{movie.indicePopularidad}}</h5>
+        <br>
+        <h5>¿Qué calificación le das a la película?</h5>
+        <div class="form-group">
+          <select id="inputState" class="form-control" [(ngModel)]="score">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+          </select>
+        </div>
+        <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Escribe un comentario" [(ngModel)]="comment"></textarea>
+        <br>
+        <button type="button" class="btn btn-dark">Enviar</button>
+      </div>
+      </div>      
+    </div>
+  </div>
+</section>
+<section *ngIf="msize>0 && loading==false">
+  <h1 class="commentsection" >Según la comunidad:</h1>
+  <table class="table" >
+    <thead class="thead-dark">
+      <tr>
+        <th></th>
+        <th>Calificacion</th>
+        <th>Comentario</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let comment of comments">
+        <th></th>
+        <td>{{comment.calificacion}}</td>
+        <td>{{comment.comentario}}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+  <div class="alert alert-dark" role="alert" *ngIf="csize==0 && loading==false && msize>0">
+    Nadie ha calificado esta pelicula
+  </div>
+  <div class="alert alert-dark" role="alert" *ngIf="msize==0 && loading==false">
+    Esta pelicula no existe
+  </div>
+  <div *ngIf="loading==true" class="text-center">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+
+  

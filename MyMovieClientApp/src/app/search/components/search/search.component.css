@@ -22,3 +22,7 @@
 .text-danger{
     text-align: center;
 }
+.scrollable{
+    overflow-x:hidden; 
+    overflow-y:auto;
+}

@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MovieCreationModule } from './movie-creation/movie-creation.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchModule } from './search/search.module';
-
+import { MovieprofileModule } from './movieprofile/movieprofile.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,8 @@ import { SearchModule } from './search/search.module';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    SearchModule
+    SearchModule,
+    MovieprofileModule
   ],
   providers: [],
   bootstrap: [AppComponent]

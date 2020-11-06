@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SearchComponent } from './components/search/search.component';
+import { MovieprofileComponent } from './components/movieprofile/movieprofile.component';
 
 const routes: Routes = [
-  {path: 'busqueda', component: SearchComponent}
+  {path: 'pelicula/:id', component: MovieprofileComponent}
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class SearchRoutingModule { }
+export class MovieprofileRoutingModule { }
