@@ -30,7 +30,7 @@ namespace MyMovieServer.Controllers
         public List<PeliculaGeneralPM> GetGenero(String name)
         {
             
-            return _logicaBusqueda.getMovies(name, _context);
+            return _logicaBusqueda.GetPeliculas(name, _context);
         }
 
     }

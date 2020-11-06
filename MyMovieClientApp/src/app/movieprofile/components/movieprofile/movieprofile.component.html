@@ -81,8 +81,8 @@
     </div>
   </div>
 </section>
-<section >
-  <h1 class="commentsection" *ngIf="msize>0 && loading==false">Según la comunidad:</h1>
+<section *ngIf="msize>0 && loading==false">
+  <h1 class="commentsection" >Según la comunidad:</h1>
   <table class="table" >
     <thead class="thead-dark">
       <tr>
@@ -99,6 +99,7 @@
       </tr>
     </tbody>
   </table>
+</section>
   <div class="alert alert-dark" role="alert" *ngIf="csize==0 && loading==false && msize>0">
     Nadie ha calificado esta pelicula
   </div>
@@ -110,5 +111,5 @@
       <span class="sr-only">Loading...</span>
     </div>
   </div>
-</section>
+
   

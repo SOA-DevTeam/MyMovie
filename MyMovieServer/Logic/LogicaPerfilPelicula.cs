@@ -10,7 +10,7 @@ namespace MyMovieServer.Logic
     public class LogicaPerfilPelicula
     {
 
-        public List<PerfilPeliculaPM> GetMovie(int id, MyMovieDBContext context)
+        public List<PerfilPeliculaPM> GetPelicula(int id, MyMovieDBContext context)
         {
             List<PerfilPeliculaPM> peliculas = new List<PerfilPeliculaPM>();
             var pelicula = (from peli in context.Pelicula

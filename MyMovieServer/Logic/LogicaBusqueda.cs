@@ -15,7 +15,7 @@ namespace MyMovieServer.Logic
         {
         }
 
-        public List<PeliculaGeneralPM> getMovies(string name, MyMovieDBContext context)
+        public List<PeliculaGeneralPM> GetPeliculas(string name, MyMovieDBContext context)
         {
             List<PeliculaGeneralPM> peliculas = new List<PeliculaGeneralPM>();
             var pelicula = (from peli in context.Pelicula

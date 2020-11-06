@@ -25,10 +25,10 @@ namespace MyMovieServer.Controllers
             _logger = logger;
         }
         [HttpGet("{id}")]
-        public List<PerfilPeliculaPM> GetGenero(int id)
+        public List<PerfilPeliculaPM> GetPelicula(int id)
         {
 
-            return _logicaPelicula.GetMovie(id, _context);
+            return _logicaPelicula.GetPelicula(id, _context);
         }
 
         [HttpGet("comentarios/{id}")]
