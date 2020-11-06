@@ -15,7 +15,11 @@ namespace MyMovieServer.Logic.Tests
         {
             MyMovieDBContext context = new MyMovieDBContext();
             LogicaFiltrosRecomendacion controller = new LogicaFiltrosRecomendacion();
-            Console.WriteLine(controller.notacomunidad(1,context));
+            var test = controller.notacomunidad(1, context) == 5.6666666666666666666666666667m;
+            var test2 = controller.getGen(context)[0].Genero1 == "Accion";
+            var test3 = controller.getPeliculas(context, 1)[0].IdGenero == 1;
+
+            Assert.IsTrue(test && test2 && test3);
         }
     }
 }
