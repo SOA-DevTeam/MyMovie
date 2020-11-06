@@ -20,7 +20,7 @@
         <tbody class="scrollable">
             <tr *ngFor="let movie of movies">
                 <td></td>
-                <td><a [routerLink]="['../movie', movie.idPelicula]" routerLinkActive="active">{{movie.nombrePelicula}}</a></td>
+                <td><a [routerLink]="['../pelicula', movie.idPelicula]" routerLinkActive="active">{{movie.nombrePelicula}}</a></td>
                 <td>{{movie.director}}</td>
                 <td>{{movie.anoPelicula}}</td>
                 <td>{{movie.notaComunidad}}</td>

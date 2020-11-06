@@ -12,7 +12,6 @@ export class SearchComponent implements OnInit {
   // Object with movies data from the get method
   // tslint:disable-next-line: ban-types
   movies: Object;
-
   loading: boolean;
 
 
@@ -25,13 +24,12 @@ export class SearchComponent implements OnInit {
   // tslint:disable-next-line: typedef
   searchMovie(){
     const name = this.name;
-    if (name.length > 4){
-      this.loading = true;
-      this.httpService.getMovies(name).subscribe(data => {
-      this.movies = data;
-      this.loading = false;
+    this.loading = true;
+    this.httpService.getMovies(name).subscribe(data => {
+    this.movies = data;
+    this.loading = false;
     });
-    }
+
   }
 
 }

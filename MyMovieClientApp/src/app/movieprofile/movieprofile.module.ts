@@ -11,6 +11,8 @@ import { MovieprofileComponent } from './components/movieprofile/movieprofile.co
     CommonModule,
     MovieprofileRoutingModule,
     FormsModule
+  ], exports : [
+    MovieprofileComponent
   ]
 })
 export class MovieprofileModule { }

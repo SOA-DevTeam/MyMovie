@@ -1,4 +1,7 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 import { MovieprofileComponent } from './movieprofile.component';
 
@@ -8,7 +11,14 @@ describe('MovieprofileComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MovieprofileComponent ]
+      declarations: [ MovieprofileComponent ],
+      imports: [HttpClientModule],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {snapshot: {params: {'id': 1}}}
+        },
+      ]
     })
     .compileComponents();
   });
@@ -22,4 +32,17 @@ describe('MovieprofileComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have null data at the beggining', () => {
+    expect(component.movies).toBe(undefined);
+  });
+
+  it('should count -1 if the movie request was failed', () => {
+    expect(component.msize).toBe(-1);
+  });
+
+  it('should count -1 if the comments request was failed', () => {
+    expect(component.csize).toBe(-1);
+  });
+
 });
