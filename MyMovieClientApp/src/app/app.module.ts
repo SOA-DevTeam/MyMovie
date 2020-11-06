@@ -10,7 +10,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchModule } from './search/search.module';
 import { MovieprofileModule } from './movieprofile/movieprofile.module';
 import { RecommendationsModule } from './recommendations/recommendations.module';
-
 @NgModule({
   declarations: [
     AppComponent

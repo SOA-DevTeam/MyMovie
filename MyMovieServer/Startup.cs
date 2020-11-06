@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MyMovieServer.Logic;
 using MyMovieServer.Models;
 using Newtonsoft.Json.Serialization;
 
@@ -44,7 +45,6 @@ namespace MyMovieServer
             services.AddDbContext<MyMovieDBContext>();
             services.AddScoped<MyMovieDBContext>();
             services.AddControllers();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

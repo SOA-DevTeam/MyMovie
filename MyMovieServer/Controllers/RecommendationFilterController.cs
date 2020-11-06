@@ -43,8 +43,8 @@ namespace MyMovieServer.Controllers
                 calificacionesPel.Add(pel);
             }
             IEnumerable<CalificacionesDePelicula> peliculaCalificadas =
-                from p in calificacionesPel orderby p.Total descending select p;
-            return peliculaCalificadas;
+                from p in calificacionesPel orderby p.Total descending select p ;
+            return peliculaCalificadas.Take(10);
         }
 
         [HttpGet("cal")]
