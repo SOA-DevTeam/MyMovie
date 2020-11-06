@@ -47,6 +47,7 @@ export class HttpService {
   getComments(id: string){
     return this.http.get(this.restUrl + 'pelicula/comentarios/' + id);
   }
+
   getAllGen(){
     return this.http.get<Genero[]>(this.restUrl + "/rf/gen");
   }
