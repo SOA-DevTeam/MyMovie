@@ -14,19 +14,19 @@ export class HttpService {
 
 
   getGenres() {
-    return this.http.get(this.devURL + 'generos');
+    return this.http.get(this.prodURL + 'generos');
   }
 
   getLang() {
-    return this.http.get(this.devURL + 'idiomas');
+    return this.http.get(this.prodURL + 'idiomas');
   }
 
   getStyles() {
-    return this.http.get(this.devURL + 'estilos');
+    return this.http.get(this.prodURL + 'estilos');
   }
 
   async addMovie(postData): Promise<string> {
-    await this.http.post((this.devURL + 'nuevaPeli'), postData).toPromise().then(response => {
+    await this.http.post((this.prodURL + 'nuevaPeli'), postData).toPromise().then(response => {
       this.postResponse = response.toString();
     });
     return this.postResponse
