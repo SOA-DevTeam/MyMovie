@@ -23,10 +23,22 @@ namespace MyMovieServer.Logic
                             join cali in context.Calificacion
                             on peli.IdPelicula equals cali.IdPelicula into joined
                             from joi in joined.DefaultIfEmpty()
-                            where peli.IdPelicula==id
-                            group joi by new { peli.IdPelicula, peli.NombrePelicula, 
-                                peli.Director, peli.AnoPelicula, peli.Favorito, peli.NotaImdb, 
-                                peli.NotaMetascore, gene.Genero1, idio.Idioma1, esti.Estilo1, peli.Imagen, peli.IndicePopularidad  } into gr
+                            where peli.IdPelicula == id
+                            group joi by new
+                            {
+                                peli.IdPelicula,
+                                peli.NombrePelicula,
+                                peli.Director,
+                                peli.AnoPelicula,
+                                peli.Favorito,
+                                peli.NotaImdb,
+                                peli.NotaMetascore,
+                                gene.Genero1,
+                                idio.Idioma1,
+                                esti.Estilo1,
+                                peli.Imagen,
+                                peli.IndicePopularidad
+                            } into gr
                             select new
                             {
                                 idPelicula = gr.Key.IdPelicula,
@@ -46,7 +58,8 @@ namespace MyMovieServer.Logic
 
 
             int i = 0;
-            foreach (var p in pelicula) { 
+            foreach (var p in pelicula)
+            {
 
                 PerfilPeliculaPM spelicula = new PerfilPeliculaPM();
                 spelicula.idPelicula = pelicula.ElementAt(i).idPelicula;
@@ -68,6 +81,33 @@ namespace MyMovieServer.Logic
             }
             return peliculas;
         }
-    }
 
+        public List<ComentariosPM> GetComentarios(int id, MyMovieDBContext context)
+        {
+            List<ComentariosPM> comentarios = new List<ComentariosPM>();
+            var comentario = (from coment in context.Calificacion
+                              where coment.IdPelicula == id
+                              orderby coment.IdPelicula
+                              select new
+                              {
+                                  idCalificacion = coment.IdCalificacion,
+                                  Calificacion = coment.Calificacion1,
+                                  Comentario = coment.Comentario
+                              }).ToList();
+            int i = 0;
+            foreach (var c in comentario)
+            {
+
+                ComentariosPM comenta = new ComentariosPM();
+                comenta.idCalificacion = comentario.ElementAt(i).idCalificacion;
+                comenta.Calificacion = (decimal)comentario.ElementAt(i).Calificacion;
+                comenta.Comentario = comentario.ElementAt(i).Comentario;
+                comentarios.Add(comenta);
+                i++;
+
+            }
+            return comentarios;
+        }
+
+    }
 }

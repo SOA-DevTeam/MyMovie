@@ -11,22 +11,28 @@ export class MovieprofileComponent implements OnInit {
   // Object to store http data
   // tslint:disable-next-line: ban-types
   movies: Object;
-  loading: boolean;
+  loading = false;
+  // tslint:disable-next-line: ban-types
+  comments: Object;
+  score: number;
+  comment: string;
 
   constructor(public httpService: HttpService, private route: ActivatedRoute) {
-    
+
     this.httpService.getMovie(this.route.snapshot.params['id']).subscribe(data => {
-      this.loading = true;
       this.movies = data;
-      this.loading = false;
+      });
+
+    this.httpService.getComments(this.route.snapshot.params['id']).subscribe(d => {
+        this.loading = true;
+        this.comments = d;
+        this.loading = false;
       });
   }
 
   ngOnInit(): void {
   }
 
-  isUndefined(val): boolean{
-    return typeof val === 'undefined';
-  }
+
 
 }

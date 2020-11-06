@@ -1,9 +1,9 @@
-<section><h1 style="text-align: center; margin-top: 20px; margin-bottom: 20px" *ngFor="let movie of movies">{{movie.nombrePelicula}}</h1></section>
+<section><h1 class="movietitle" *ngFor="let movie of movies">{{movie.nombrePelicula}}</h1></section>
 <section>
-<div class="media" style="margin-left: 70px; margin-right: 70px" *ngFor="let movie of movies">
-    <img src="{{movie.imagen}}" class="align-self-start mr-3" height="500" width="400">
-    <div class="media-body" style="margin-left: 30px;" >
-      <div style="float: left; margin-right: 70px;">
+<div class="media" *ngFor="let movie of movies">
+    <img src="{{movie.imagen}}" class="align-self-start mr-3" height="530" width="400">
+    <div class="media-body" >
+      <div class="leftbox">
         <h4>Director:</h4>
         <h5>{{movie.director}}</h5>
         <br>
@@ -19,9 +19,10 @@
         <h4>Estilo:</h4>
         <h5>{{movie.estilo}}</h5>
         <br>
+        <br>
         <button type="button" class="btn btn-dark">Editar Informacion</button>
       </div>
-      <div style="float: left;  margin-left: 50px;">
+      <div class="rightbox">
         <h4>Calificacion de la comunidad</h4>
         <div class="scorebox">
           <h3 *ngIf="movie.notaComunidad > 8.9" class="great-score">{{movie.notaComunidad| number:'1.1-1'}}</h3>
@@ -31,7 +32,7 @@
           <h3 *ngIf="movie.notaComunidad < 6.5 && movie.notaComunidad > 5 " class="notsobad-score">{{movie.notaComunidad| number:'1.1-1'}}</h3>
           <h3 *ngIf="movie.notaComunidad < 5.1" class="bad-score">{{movie.notaComunidad| number:'1.1-1'}}</h3>    
         </div>
-        <div style="float: left; margin-right: 40px;">
+        <div class="secondscore">
           <h5 >IMDb</h5>
           <h4 *ngIf="movie.notaIMDb > 8.9" class="tgreat-score">{{movie.notaIMDb| number:'1.1-1'}}</h4>
           <h4 *ngIf="movie.notaIMDb < 9 && movie.notaIMDb > 7.9" class="tgood-score">{{movie.notaIMDb| number:'1.1-1'}}</h4>
@@ -54,9 +55,22 @@
         <h5 *ngIf="movie.favorito === false">Favorita de la plataforma: &#10060;</h5>
         <h5>Indice de popularidad: {{movie.indicePopularidad}}</h5>
         <br>
-        <h5>¿Qué te pareció la película?</h5>
-        <h5>**********</h5>
-        <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Escribe un comentario"></textarea>
+        <h5>¿Qué calificación le das a la película?</h5>
+        <div class="form-group col-md-4">
+          <select id="inputState" class="form-control" [(ngModel)]="score">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+          </select>
+        </div>
+        <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Escribe un comentario" [(ngModel)]="score"></textarea>
         <br>
         <button type="button" class="btn btn-dark">Enviar</button>
       </div>
@@ -64,7 +78,24 @@
     </div>
   </div>
 </section>
-<section *ngIf="loading==false">
-  <h1 style="text-align: center; margin-top: 20px;">La comunidad opinó:</h1>
+<section >
+  <h1 class="commentsection">Según la comunidad:</h1>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th></th>
+        <th>Calificacion</th>
+        <th>Comentario</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let comment of comments">
+        <th></th>
+        <td>{{comment.calificacion}}</td>
+        <td>{{comment.comentario}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <h4 class="nocomment" *ngIf="comments.toString().length==0 && loading==false">Aun no hay comentarios :( </h4>
 </section>
   

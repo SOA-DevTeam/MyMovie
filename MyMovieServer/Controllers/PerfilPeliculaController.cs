@@ -30,5 +30,12 @@ namespace MyMovieServer.Controllers
 
             return _logicaPelicula.GetMovie(id, _context);
         }
+
+        [HttpGet("comentarios/{id}")]
+        public List<ComentariosPM> GetComentarios(int id)
+        {
+
+            return _logicaPelicula.GetComentarios(id, _context);
+        }
     }
 }

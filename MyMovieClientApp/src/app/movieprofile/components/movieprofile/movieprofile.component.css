@@ -65,3 +65,48 @@
 .tgreat-score{
     color:green; 
 }
+
+.media{
+    margin-left: 70px; 
+    margin-right: 70px;
+}
+
+.mediabody{
+    margin-left: 30px;
+}
+
+.leftbox{
+    float: left; margin-right: 70px;
+}
+
+.rightbox{
+    float: left;  
+    margin-left: 50px;
+}
+
+.secondscore{
+    float: left; 
+    margin-right: 40px;
+}
+
+.favorite{
+    margin-bottom: 30px;
+}
+
+.commentsection{
+    text-align: center; 
+    margin-top: 20px;
+}
+
+.tbody{
+    overflow-y: scroll;
+}
+
+.nocomment{
+    text-align: center; 
+    margin-top: 20px;
+}
+
+.movietitle{
+    text-align: center; margin-top: 20px; margin-bottom: 20px
+}
