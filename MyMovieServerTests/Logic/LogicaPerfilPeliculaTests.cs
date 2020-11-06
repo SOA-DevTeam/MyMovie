@@ -37,11 +37,11 @@ namespace MyMovieServer.Logic.Tests
             //Primer elemento de la respuesta
             var response = request.ElementAt(0);
 
-            //Al existir solo un elemento con ese nombre en la base de datos, se comprueba que sea una lista de un elemento
-            //Tambien se comprueba que la mayoria de los datos son los mismos del elemento en la base de datos
+            //Se comprueba que el primer elemento de la lista sea el que tiene el id=1 y por lo tanto sus respectivos
+            //datos
             var isEqual = response.idCalificacion==1 && response.Calificacion==10 && response.Comentario.Equals("Very good movie");
 
-            //Si el elemento es igual, se pasa la prueba
+            //Si el elemento es igual al esperado, se pasa la prueba
             Assert.IsTrue(isEqual);
         }
     }
