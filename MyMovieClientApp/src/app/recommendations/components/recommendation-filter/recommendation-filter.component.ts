@@ -50,7 +50,6 @@ export class RecommendationFilterComponent implements OnInit {
 
 
   calculateTotal(item){
-    console.log(this.total);
     this.total = 100 - this.imdb - this.popularity - this.community - this.metascore - this.platform;
     this.validate();
   }
@@ -60,7 +59,6 @@ export class RecommendationFilterComponent implements OnInit {
       this.goodT = 1;
     }else{
       this.goodT = -1;
-      console.log(this.total);
     }
 
     }
@@ -68,7 +66,6 @@ export class RecommendationFilterComponent implements OnInit {
   filter(){
     if(this.goodT == 1){
       this.goodF = 1;
-      console.log(this.genero);
     }else{
       this.goodF = -1;
       this.httpS.getMoviesFilter(this.genero.toString(),
