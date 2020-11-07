@@ -11,9 +11,9 @@ describe('HttpService', () => {
   beforeEach(() => {
     service = new HttpService(c);
     TestBed.configureTestingModule({
-      imports: [HttpClientModule],
-      schemas: [NO_ERRORS_SCHEMA],
-      providers: []
+      imports : [HttpClientModule],
+      schemas : [NO_ERRORS_SCHEMA],
+      providers : []
     }).compileComponents();
     service = TestBed.inject(HttpService);
   });

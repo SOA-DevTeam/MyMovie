@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { PeliculasCalificadas } from './recommendations/models/peliculasCalificadas';
+import { Genero } from './recommendations/models/genero';
 
 @Injectable({
   providedIn: 'root'
@@ -46,4 +48,11 @@ export class HttpService {
     return this.http.get(this.restUrl + 'pelicula/comentarios/' + id);
   }
 
+  getAllGen(){
+    return this.http.get<Genero[]>(this.restUrl + "/rf/gen");
+  }
+
+  getMoviesFilter(idGen : string, comunidad : string, imdb : string, metascore : string, popularidad : string, favorito : string){
+    return this.http.get<PeliculasCalificadas[]>(this.restUrl + "/rf/get/" + idGen + "/" + comunidad + "/" + imdb + "/" + metascore + "/" + popularidad + "/" + favorito);
+  }
 }
