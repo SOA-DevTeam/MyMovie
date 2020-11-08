@@ -29,12 +29,18 @@ export class MovieprofileComponent implements OnInit {
       this.msize = this.Size(this.movies);
       });
 
+      this.getComments();
+
+    
+  }
+
+  getComments(){
     this.httpService.getComments(this.route.snapshot.params['id']).subscribe(d => {
-        this.loading = true;
-        this.comments = d;
-        this.csize = this.Size(this.comments);
-        this.loading = false;
-      });
+      this.loading = true;
+      this.comments = d;
+      this.csize = this.Size(this.comments);
+      this.loading = false;
+    });
   }
 
   async postComment(){
@@ -49,8 +55,7 @@ export class MovieprofileComponent implements OnInit {
   else {
     this.putPop();
   }
-    
-
+  this.getComments();
   }
 
   popUpdate(){
