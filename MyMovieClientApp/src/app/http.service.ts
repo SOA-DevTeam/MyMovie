@@ -16,6 +16,7 @@ export class HttpService {
   private devURL: string = "http://localhost:63546/";
   private prodURL: string = "https://mymovierest.azurewebsites.net/"
   postResponse: string;
+  putResponse: string;
 
   getGenres() {
     return this.http.get(this.prodURL + 'generos');
@@ -55,4 +56,20 @@ export class HttpService {
   getMoviesFilter(idGen : string, comunidad : string, imdb : string, metascore : string, popularidad : string, favorito : string){
     return this.http.get<PeliculasCalificadas[]>(this.restUrl + "/rf/get/" + idGen + "/" + comunidad + "/" + imdb + "/" + metascore + "/" + popularidad + "/" + favorito);
   }
-}
+
+  async postComment(postData): Promise<string>{
+    await this.http.post((this.devURL + 'comentar'), postData).toPromise().then(response => {
+      this.postResponse = response.toString();
+    });
+    return this.postResponse;
+  }
+
+  async putPopularity(putData): Promise<string>{
+    await this.http.put((this.devURL + 'comentar'), putData).toPromise().then(response => {
+      this.putResponse = response.toString();
+    });
+    return this.putResponse;
+  }
+
+  }
+

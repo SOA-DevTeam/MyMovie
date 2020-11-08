@@ -5,11 +5,9 @@ using System.Threading.Tasks;
 
 namespace MyMovieServer.Presentation_Model
 {
-    public class ComentariosPM
+    public class PopularidadPM
     {
-        public int idCalificacion { get; set; }
         public int idPelicula { get; set; }
-        public decimal Calificacion { get; set; }
-        public string Comentario { get; set; }
+        public int indicePopularidad { get; set; }
     }
 }
