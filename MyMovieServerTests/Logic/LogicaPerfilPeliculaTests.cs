@@ -39,9 +39,6 @@ namespace MyMovieServer.Logic.Tests
 
             //Se comprueba que el primer elemento de la lista sea el que tiene el id=1 y por lo tanto sus respectivos
             //datos
-            Console.WriteLine(response.idCalificacion);
-            Console.WriteLine(response.Calificacion);
-            Console.WriteLine(response.Comentario);
             var isEqual = response.idCalificacion==23 && response.Calificacion==8 && response.Comentario.Equals("Buena pelicula");
 
             //Si el elemento es igual al esperado, se pasa la prueba
