@@ -33,13 +33,16 @@ namespace MyMovieServer.Logic.Tests
         public void GetComentariosTest()
         {
             var getPelicula = new LogicaPerfilPelicula();
-            var request = getPelicula.GetComentarios(1511, new MyMovieDBContext());
+            var request = getPelicula.GetComentarios(1493, new MyMovieDBContext());
             //Primer elemento de la respuesta
             var response = request.ElementAt(0);
 
             //Se comprueba que el primer elemento de la lista sea el que tiene el id=1 y por lo tanto sus respectivos
             //datos
-            var isEqual = response.idCalificacion==22 && response.Calificacion==7 && response.Comentario.Equals("Regular");
+            Console.WriteLine(response.idCalificacion);
+            Console.WriteLine(response.Calificacion);
+            Console.WriteLine(response.Comentario);
+            var isEqual = response.idCalificacion==23 && response.Calificacion==8 && response.Comentario.Equals("Buena pelicula");
 
             //Si el elemento es igual al esperado, se pasa la prueba
             Assert.IsTrue(isEqual);
