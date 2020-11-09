@@ -26,7 +26,7 @@
         <button type="button" class="btn btn-dark"[routerLink]="['../editar', movie.idPelicula]" routerLinkActive="active">Editar Informacion</button>
       </div>
       <div class="rightbox">
-        <h4>Calificacion de la comunidad</h4>
+        <h4>Calificación de la comunidad</h4>
         <div class="scorebox">
           <h3 *ngIf="movie.notaComunidad > 8.9" class="great-score">{{movie.notaComunidad| number:'1.1-1'}}</h3>
           <h3 *ngIf="movie.notaComunidad < 9 && movie.notaComunidad > 7.9 " class="good-score">{{movie.notaComunidad| number:'1.1-1'}}</h3>
