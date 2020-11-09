@@ -58,7 +58,7 @@ export class HttpService {
   }
 
   async updateMovie(putData): Promise<string> {
-    await this.http.put((this.devURL + 'modificar'), putData).toPromise().then(response => {
+    await this.http.put((this.prodURL + 'modificar'), putData).toPromise().then(response => {
       this.putResponse = response.toString();
     });
     return this.putResponse;
