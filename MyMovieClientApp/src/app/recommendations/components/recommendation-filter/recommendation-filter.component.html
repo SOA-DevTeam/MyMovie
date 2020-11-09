@@ -1,27 +1,39 @@
-<div class="jumbotron text-center">
-    <h1>Recomendación por filtros</h1>
-    <p>Ingresa los valores de los filtros a continuación</p>
+<div class="contaniner-xl">
+  <div class="jumbotron jumbotron-fluid rounded" id="jumboAD">
+      <div class="container">
+        <h1 class="display-1">Recomendaciones por género</h1>
+        <p class="h3">Tú decides los criterios de búsqueda</p>
+        <p class="h5">Recibe las mejores recomendaciones para tí</p>
+        <p class="lead"> Y simplemente decide cuál película ver ;)</p>
+        <br>
+        <hr class="my-4">
+        <blockquote class="blockquote text-center">
+          <p class="mb-0">You now what they call a Quarter Pounder with Cheese in France?</p>
+          <footer class="blockquote-footer">Jules Winnfield, <cite title="Source Title">Pulp Fiction</cite></footer>
+        </blockquote>
+      </div>
+    </div>
 </div>
 
-<div class="container" style="margin-left: 0%;">
+<div class="container-a" style="margin-left: 0%;">
     <div class="row">
       <div class="col-sm-4">
-        <h2>Filtros</h2>
+        <h2 class="ctitle">Filtros</h2>
         <label for="">Género: </label>
         <select name="" id="" class="form-control" [(ngModel)] = "genero">
           <option [value]="gen.idGenero" *ngFor = "let gen of generos" >{{ gen.genero1 }}</option>
         </select>
         <h5>Categorias:</h5>
         <label for="">Nota IMDB:</label>
-        <input class="form-control" type="number" min="0" max="100" [(ngModel)] = "imdb" (ngModelChange)="calculateTotal(imdb)" required>
+        <input class="form-control" type="number" min="0" max="35" [(ngModel)] = "imdb" (ngModelChange)="calculateTotal(imdb)" required>
         <label for="">Nota MetaScore:</label>
-        <input class="form-control" type="number" min="0" [(ngModel)] = "metascore" (ngModelChange)="calculateTotal(metascore)" max="100" required>
+        <input class="form-control" type="number" min="0" [(ngModel)] = "metascore" (ngModelChange)="calculateTotal(metascore)" max="35" required>
         <label for="">Nota de Comunidad:</label>
-        <input class="form-control" type="number" min="0" [(ngModel)] = "community" (ngModelChange)="calculateTotal(community)" max="100" required>
+        <input class="form-control" type="number" min="0" [(ngModel)] = "community" (ngModelChange)="calculateTotal(community)" max="35" required>
         <label for="">Favorita de la plataforma:</label>
-        <input class="form-control" type="number" min="0" [(ngModel)] = "platform" (ngModelChange)="calculateTotal(platform)" max="100" required>
+        <input class="form-control" type="number" min="0" [(ngModel)] = "platform" (ngModelChange)="calculateTotal(platform)" max="35" required>
         <label for="">Índice de Popularidad:</label>
-        <input class="form-control" type="number" min="0" [(ngModel)] = "popularity" (ngModelChange)="calculateTotal(popularity)" max="100" required>
+        <input class="form-control" type="number" min="0" [(ngModel)] = "popularity" (ngModelChange)="calculateTotal(popularity)" max="35" required>
         <div>
           <label for="" *ngIf="goodT != -1" style="color: red;">La suma de categorias debe ser 100</label>
           <label for="" *ngIf="goodF != -1" style="color: red;">Resuelve el problema primero</label>
@@ -30,9 +42,9 @@
       </div>
       <div class="col-lg-8 col-sm-8" style="margin-right: 0%;">
         <div class="row" *ngFor = "let pel of peliculas">
-            <img class="col-lg-4" src="{{ pel.imagen }}" alt="Card image" width="20" height="120">
+            <img class="col-lg-4" src="{{ pel.imagen }}" alt="Card image" width="30" height="150">
             <div class="col-lg-6">
-                <h5 >{{ pel.nombrePelicula }}</h5>
+                <h5><a [routerLink]="['../pelicula', pel.idPelicula]" routerLinkActive="active">{{ pel.nombrePelicula }}</a></h5>
                 <p >Calificación: {{ pel.total }}</p>
             </div>
         </div>

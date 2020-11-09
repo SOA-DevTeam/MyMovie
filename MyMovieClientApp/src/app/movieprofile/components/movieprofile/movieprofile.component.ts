@@ -68,7 +68,7 @@ export class MovieprofileComponent implements OnInit {
       this.pop = 10
     }else if(this.csize==10){
       this.pop = 15;
-    }else if (this.csize==10){
+    }else if (this.csize==20){
       this.pop = 20;
     }else{
       this.pop = 0;

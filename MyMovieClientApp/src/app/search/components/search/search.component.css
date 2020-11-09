@@ -1,6 +1,7 @@
 .center{
     text-align: center;
     margin-top: 25px;
+    color: white;
 }
 .dcenter{
     text-align: center;
@@ -23,6 +24,21 @@
     text-align: center;
 }
 .scrollable{
-    overflow-x:hidden; 
-    overflow-y:auto;
+    color: white;
 }
+
+  .stable {
+    margin-top: 10px;
+    position: relative;
+    height: 400px;
+    overflow-y: auto;
+    }
+    .stable thead th {
+      position: sticky; 
+      top: 0; 
+      }
+
+      a:link {
+        color: rgb(218, 81, 18);
+      }
+  

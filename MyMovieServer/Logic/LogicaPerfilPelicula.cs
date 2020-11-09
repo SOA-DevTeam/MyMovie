@@ -87,13 +87,13 @@ namespace MyMovieServer.Logic
             List<ComentariosPM> comentarios = new List<ComentariosPM>();
             var comentario = (from coment in context.Calificacion
                               where coment.IdPelicula == id
-                              orderby coment.IdCalificacion descending
                               select new
                               {
                                   idCalificacion = coment.IdCalificacion,
                                   Calificacion = coment.Calificacion1,
                                   Comentario = coment.Comentario
                               }).ToList();
+
             int i = 0;
             foreach (var c in comentario)
             {
@@ -102,6 +102,7 @@ namespace MyMovieServer.Logic
                 comenta.idCalificacion = comentario.ElementAt(i).idCalificacion;
                 comenta.Calificacion = (decimal)comentario.ElementAt(i).Calificacion;
                 comenta.Comentario = comentario.ElementAt(i).Comentario;
+                comentarios.Insert(0,comenta);
                 comentarios.Add(comenta);
                 i++;
 
