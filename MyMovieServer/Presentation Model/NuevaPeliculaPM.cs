@@ -16,7 +16,7 @@ namespace MyMovieServer.Presentation_Model
         public decimal mdb;
         public decimal meta;
         public bool fav;
-        public int pop;
+        public decimal pop;
         public string imagen;
     }
 }
