@@ -12,7 +12,6 @@ export class HttpService {
   restUrl = 'https://mymovierest.azurewebsites.net/';
 
   constructor(private http: HttpClient) { }
-
   private devURL: string = "http://localhost:63546/";
   private prodURL: string = "https://mymovierest.azurewebsites.net/"
   postResponse: string;
@@ -38,15 +37,15 @@ export class HttpService {
   }
 
   getMovies(name: string) {
-    return this.http.get(this.restUrl + 'busquedaPelicula/' + name);
+    return this.http.get(this.prodURL + 'busquedaPelicula/' + name);
   }
 
   getMovie(id: string) {
-    return this.http.get(this.restUrl + 'pelicula/' + id);
+    return this.http.get(this.prodURL + 'pelicula/' + id);
   }
 
   getComments(id: string) {
-    return this.http.get(this.restUrl + 'pelicula/comentarios/' + id);
+    return this.http.get(this.prodURL + 'pelicula/comentarios/' + id);
   }
 
   getAllGen() {
@@ -58,14 +57,14 @@ export class HttpService {
   }
 
   async postComment(postData): Promise<string>{
-    await this.http.post((this.devURL + 'comentar'), postData).toPromise().then(response => {
+    await this.http.post((this.prodURL + 'comentar'), postData).toPromise().then(response => {
       this.postResponse = response.toString();
     });
     return this.postResponse;
   }
 
   async putPopularity(putData): Promise<string>{
-    await this.http.put((this.devURL + 'comentar'), putData).toPromise().then(response => {
+    await this.http.put((this.prodURL + 'comentar'), putData).toPromise().then(response => {
       this.putResponse = response.toString();
     });
     return this.putResponse;
