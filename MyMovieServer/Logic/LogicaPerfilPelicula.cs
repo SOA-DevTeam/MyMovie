@@ -87,7 +87,7 @@ namespace MyMovieServer.Logic
             List<ComentariosPM> comentarios = new List<ComentariosPM>();
             var comentario = (from coment in context.Calificacion
                               where coment.IdPelicula == id
-                              orderby coment.IdPelicula
+                              orderby coment.IdCalificacion descending
                               select new
                               {
                                   idCalificacion = coment.IdCalificacion,
