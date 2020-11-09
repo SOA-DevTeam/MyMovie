@@ -15,9 +15,9 @@
       </div>
 </div>
 <div class="container-fluid" id="div">
-    <div class="container rounded">
+    <div class="container">
         <div class="row">
-          <div class="col-sm-6 rounded" *ngFor="let mov of movie" id="div1">
+          <div class="col-sm-4" *ngFor="let mov of movie" id="div1">
             <p class="h2">Datos Actuales de la Película</p>
             <br>
             <div class="leftbox">
@@ -55,7 +55,7 @@
               <br>
               </div>
           </div>
-          <div class="col-sm-6 rounded" id="div2">
+          <div class="col-sm-8" id="div2">
             <p class="h2">Nuevos Datos de la Película</p>
             <br>
             <form [formGroup]="moviesForm" (ngSubmit)="onSubmit()">
@@ -145,22 +145,34 @@
               <div class="form-group row">
                   <br>
                   <div class="col">
-                      <button type="submit" [disabled]="!moviesForm.valid" class="btn" id="agbtn"><strong>Agregar Película</strong>
+                      <button type="submit" [disabled]="!moviesForm.valid" class="btn" id="agbtn"><strong> Modificar Datos</strong>
                       </button>
                   </div>
+                  <div class="col-10">
+                    <div class="alert alert-danger" *ngIf="putStatus == 404" role="alert">
+                        Hubo un error, inténtelo más tarde.
+                    </div>
+                </div>
+                <div class="col-10">
+                    <div class="alert alert-success" *ngIf="putStatus == 200" role="alert">
+                        Datos modificados con éxito!
+                    </div>
+                </div>
               </div>
               <br>                 
             </form>
           </div>
     </div>
 </div>
-<div class="container-fluid" id="div">
-  <div class="container rounded">
+<div class="container-fluid">
+  <div class="container" id="divimg">
     <div class="row">
-      <div class="col-sm-6 rounded" *ngFor="let mov of movie" id="div1">
+      <div class="col-sm-6 rounded" *ngFor="let mov of movie">
+        <p class="h5">Cover de la Película:</p>
         <img src="{{mov.imagen}}" class="align-self-start mr-3" height="480" width="350">
       </div>
       <div class="col-sm-6 rounded" >
+        <p class="h5">Nuevo Cover:</p>
         <input type="file" (change)="onChange($event)" id="imageS"/>
         <br>
         <div class="container" *ngIf="myimage">

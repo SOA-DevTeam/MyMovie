@@ -26,8 +26,6 @@ export class UpdateProfileComponent implements OnInit {
       notaMeta: ['', Validators.required],
     })
 
-    //getting the movie id
-
   }
   //form variables
 
@@ -52,6 +50,7 @@ export class UpdateProfileComponent implements OnInit {
   sysFav: string;
   favSelected: boolean;
   popularity: number;
+  putStatus: number;
 
   //original data
   movie: Object;
@@ -67,6 +66,7 @@ export class UpdateProfileComponent implements OnInit {
     this.langs$ = this.getLangs();
     this.genres$ = this.getGenres();
     this.movie = this.getMovieData();
+    this.putStatus = 0;
   }
 
   //getters
@@ -93,10 +93,7 @@ export class UpdateProfileComponent implements OnInit {
       this.movieFav = data[0].favorito;
       this.moviePop = data[0].notaComunidad;
       this.popularity = this.moviePop;
-      console.log(data[0].imagen);
-      console.log(data[0].anoPelicula);
-      console.log(data[0].favorito);
-      console.log(data[0].notaComunidad);
+      this.movieID = data[0].IdPelicula = this.route.snapshot.params['id'];
     }));
     return request;
   }
@@ -134,22 +131,41 @@ export class UpdateProfileComponent implements OnInit {
     }
   }
 
+  //Check modification status
+  putFailed() {
+    this.putStatus = 404;
+  }
+
+  putSuccess() {
+    this.putStatus = 200;
+  }
+
   //generate request to server
   async onSubmit() {
     this.getFavSelection();
     this.checkFav();
     this.checkYear();
-    console.log(this.nameSelected);
-    console.log(this.directorSelected);
-    console.log(this.genreSelected);
-    console.log(this.styleSelected);
-    console.log(this.langSelected);
-    console.log(this.yearSelected);
-    console.log(this.notaMDbSelected);
-    console.log(this.notaMetaSelected);
-    console.log(this.sysFav);
-    console.log(this.favSelected);
-    console.log(this.popularity);
+    var request = this.http.updateMovie({
+      id: this.movieID,
+      nombre: this.nameSelected,
+      director: this.directorSelected,
+      anno: this.yearSelected,
+      genero: this.genreSelected,
+      estilo: this.styleSelected,
+      idioma: this.langSelected,
+      mdb: this.notaMDbSelected,
+      meta: this.notaMetaSelected,
+      fav: this.favSelected,
+      pop: this.popularity,
+      imagen: this.imageSelected
+    })
+    if (await request == "0") {
+      this.putFailed();
+    }
+    else {
+      this.putSuccess();
+    }
+    this.moviesForm.reset();
 
   }
 
@@ -183,6 +199,5 @@ export class UpdateProfileComponent implements OnInit {
       subscriber.complete();
     };
   }
-
 
 }
