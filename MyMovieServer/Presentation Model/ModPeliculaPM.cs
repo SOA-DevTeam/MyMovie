@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace MyMovieServer.Presentation_Model
 {
-    public class NuevaPeliculaPM
+    public class ModPeliculaPM
     {
+        public int id;
         public string nombre;
         public string director;
         public int anno;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router  , ActivatedRoute } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 import { HttpService } from '../../../http.service';
 
 @Component({
@@ -22,7 +22,6 @@ export class MovieprofileComponent implements OnInit {
 
   constructor(public httpService: HttpService, private route: ActivatedRoute) {
   }
-
   ngOnInit(): void {
       this.getMovie();
       this.getComments();
@@ -35,7 +34,6 @@ export class MovieprofileComponent implements OnInit {
       this.msize = this.Size(this.movies);
       });
   }
-
   getComments(){
     this.httpService.getComments(this.route.snapshot.params['id']).subscribe(d => {
       this.loading = true;
@@ -86,10 +84,9 @@ export class MovieprofileComponent implements OnInit {
   Size(obj) {
     var size = 0, key;
     for (key in obj) {
-        if (obj.hasOwnProperty(key)) size++;
+      if (obj.hasOwnProperty(key)) size++;
     }
     return size;
-    
   }
 
 }

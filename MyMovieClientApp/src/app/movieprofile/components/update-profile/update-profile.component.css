@@ -1,0 +1,25 @@
+#jumboAD {
+  margin-top: 0.4rem;
+  margin-right: 0.4rem;
+  margin-left: 0.4rem;
+  margin-bottom: 2rem;
+
+}
+
+#div1 {
+  background-color: #E3E8E9;
+  border-right: dimgrey;
+}
+
+#div2 {
+  background-color: #E3E8E9;
+}
+
+#divimg {
+  background-color: #E3E8E9;
+}
+
+#agbtn {
+  background-color: #9b999b;
+  margin-left: 15rem;
+}

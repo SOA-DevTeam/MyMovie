@@ -37,23 +37,23 @@ export class HttpService {
     return this.postResponse
   }
 
-  getMovies(name: string){
+  getMovies(name: string) {
     return this.http.get(this.restUrl + 'busquedaPelicula/' + name);
   }
 
-  getMovie(id: string){
+  getMovie(id: string) {
     return this.http.get(this.restUrl + 'pelicula/' + id);
   }
 
-  getComments(id: string){
+  getComments(id: string) {
     return this.http.get(this.restUrl + 'pelicula/comentarios/' + id);
   }
 
-  getAllGen(){
+  getAllGen() {
     return this.http.get<Genero[]>(this.restUrl + "/rf/gen");
   }
 
-  getMoviesFilter(idGen : string, comunidad : string, imdb : string, metascore : string, popularidad : string, favorito : string){
+  getMoviesFilter(idGen: string, comunidad: string, imdb: string, metascore: string, popularidad: string, favorito: string) {
     return this.http.get<PeliculasCalificadas[]>(this.restUrl + "/rf/get/" + idGen + "/" + comunidad + "/" + imdb + "/" + metascore + "/" + popularidad + "/" + favorito);
   }
 
@@ -70,6 +70,12 @@ export class HttpService {
     });
     return this.putResponse;
   }
-
+  async updateMovie(putData): Promise<string> {
+    await this.http.put((this.prodURL + 'modificar'), putData).toPromise().then(response => {
+      this.putResponse = response.toString();
+    });
+    return this.putResponse;
   }
+}
+
 

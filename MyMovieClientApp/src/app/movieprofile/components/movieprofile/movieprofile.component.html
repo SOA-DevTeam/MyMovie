@@ -24,7 +24,7 @@
         <h5>{{movie.estilo}}</h5>
         <br>
         <br>
-        <button type="button" class="btn btn-dark">Editar Informacion</button>
+        <button type="button" class="btn btn-dark"[routerLink]="['../editar', movie.idPelicula]" routerLinkActive="active">Editar Informacion</button>
       </div>
       <div class="rightbox">
         <h4>Calificacion de la comunidad</h4>
