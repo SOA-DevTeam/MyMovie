@@ -1,5 +1,3 @@
-import { Subscriber } from 'rxjs/internal/Subscriber';
-import { HttpService } from './../../../http.service';
 import { NO_ERRORS_SCHEMA } from '@angular/compiler';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -7,7 +5,6 @@ import { AddMovieComponent } from './add-movie.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { strict } from 'assert';
 
 describe('AddMovieComponent', () => {
   let component: AddMovieComponent;
@@ -53,11 +50,13 @@ describe('AddMovieComponent', () => {
   })
 
   it('should set status to 404', () => {
-    expect(component.postFailed()).toEqual(404);
+    component.postFailed()
+    expect(component.postStatus).toEqual(404);
   })
 
   it('should set status to 200', () => {
-    expect(component.postSuccess()).toEqual(200);
+    component.postSuccess()
+    expect(component.postStatus).toEqual(200);
   })
 
 
