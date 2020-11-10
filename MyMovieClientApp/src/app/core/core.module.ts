@@ -5,11 +5,12 @@ import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { AppLayoutComponent } from './layouts/app-layout/app-layout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HomeComponent } from './components/home/home.component';
 
 
 
 @NgModule({
-  declarations: [NavMenuComponent, AppLayoutComponent],
+  declarations: [NavMenuComponent, AppLayoutComponent, HomeComponent],
   imports: [
     CommonModule,
     HttpClientModule,
