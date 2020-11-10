@@ -53,7 +53,7 @@ export class MovieprofileComponent implements OnInit {
   if (await request == "0") {
     console.log("fail");
   }else{
-    await this.putPop();
+    this.putPop();
     this.getMovie();
     this.getComments();
     this.comment="";

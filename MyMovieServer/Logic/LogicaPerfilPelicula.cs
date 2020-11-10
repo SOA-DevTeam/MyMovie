@@ -103,7 +103,6 @@ namespace MyMovieServer.Logic
                 comenta.Calificacion = (decimal)comentario.ElementAt(i).Calificacion;
                 comenta.Comentario = comentario.ElementAt(i).Comentario;
                 comentarios.Insert(0,comenta);
-                comentarios.Add(comenta);
                 i++;
 
             }
