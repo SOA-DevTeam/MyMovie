@@ -1,5 +1,20 @@
-<h2 class="center">Busca tus peliculas favoritas</h2>
-
+<div class="contaniner-xl">
+  <div class="jumbotron jumbotron-fluid rounded" id="jumboAD">
+      <div class="container">
+        <h1 class="display-1">Buscar Película</h1>
+        <p class="h3">Busca tu pelicula favorita</p>
+        <p class="h5">Mira lo que opina nuestra comunidad</p>
+        <p class="lead"> Y deja tu propia reseña ;)</p>
+        <br>
+        <hr class="my-4">
+        <blockquote class="blockquote text-center">
+          <p class="mb-0">You now what they call a Quarter Pounder with Cheese in France?</p>
+          <footer class="blockquote-footer">Jules Winnfield, <cite title="Source Title">Pulp Fiction</cite></footer>
+        </blockquote>
+      </div>
+    </div>
+</div>
+<h1 class="center">Introduce el nombre de la película a buscar</h1>
 <div class="input-group mb-3">
     <div class="input-group-prepend">
       <button class="btn btn-dark" id="moviebtn" [disabled]="name==null || name.length<4" type="button" (click)="searchMovie()" >Buscar</button>
@@ -7,6 +22,13 @@
     <input type="text" class="form-control" placeholder="Escribe el nombre de la pelicula" (keyup.enter)="searchMovie()" aria-describedby="basic-addon1" [(ngModel)]="name" required>
   </div>
 <ng-container>
+  <p class="center">Los resultados se mostrarán aquí abajo</p>
+  <div *ngIf="loading==true" class="text-center">
+    <div class="spinner-border text-light" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <div class="stable">
     <table class="table">
         <thead class="thead-dark">
             <tr>
@@ -27,9 +49,6 @@
             </tr>
         </tbody>
     </table>
-    <div *ngIf="loading==true" class="text-center">
-        <div class="spinner-border" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
-      </div>
+  </div>
+    
 </ng-container>

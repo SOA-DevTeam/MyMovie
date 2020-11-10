@@ -8,6 +8,7 @@
 .bad-score {
   color: white;
   text-align: center;
+  font-weight: bold;
   padding-top: 20px;
   height:
     100%;
@@ -17,6 +18,7 @@
 .notsobad-score {
   color: white;
   text-align: center;
+  font-weight: bold;
   padding-top: 20px;
   height: 100%;
   background-color: rgb(240, 167, 31);
@@ -25,6 +27,7 @@
 .medium-score {
   color: white;
   text-align: center;
+  font-weight: bold;
   padding-top: 20px;
   height: 100%;
   background-color: rgb(236, 236, 40);
@@ -33,6 +36,7 @@
 .notsogood-score {
   color: white;
   text-align: center;
+  font-weight: bold;
   padding-top: 20px;
   height: 100%;
   background-color: #dbe91e;
@@ -41,6 +45,7 @@
 .good-score {
   color: white;
   text-align: center;
+  font-weight: bold;
   padding-top: 20px;
   height: 100%;
   background-color: yellowgreen;
@@ -49,6 +54,7 @@
 .great-score {
   color: white;
   text-align: center;
+  font-weight: bold;
   padding-top: 20px;
   height: 100%;
   background-color: rgb(53, 182, 53);
@@ -109,6 +115,7 @@
 .commentsection {
   text-align: center;
   margin-top: 20px;
+  color: rgb(218, 81, 18);
 }
 
 .tbody {
@@ -123,5 +130,22 @@
 .movietitle {
   text-align: center;
   margin-top: 20px;
-  margin-bottom: 20px
+  margin-bottom: 20px;
+  color: rgb(218, 81, 18);
+}
+
+.stable {
+  position: relative;
+  height: 400px;
+  overflow-y: auto;
+  }
+.scrollable{
+  color: white;
+}
+.stable thead th {
+  position: sticky; 
+  top: 0; 
+  }
+.media{
+  color: white;
 }

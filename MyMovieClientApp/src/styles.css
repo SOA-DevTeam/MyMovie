@@ -4,5 +4,15 @@
 
 body {
   font-family: 'Oswald', sans-serif;
-  background-color: #9e9c9e;
+  background-color: #141414;
+}
+a:link {
+  color: rgb(218, 81, 18);
+}
+
+a:visited {
+  color: rgb(218, 81, 18);
+}
+a:hover {
+  color: rgb(230, 194, 77);
 }

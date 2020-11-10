@@ -26,7 +26,7 @@
         <button type="button" class="btn btn-dark"[routerLink]="['../editar', movie.idPelicula]" routerLinkActive="active">Editar Informacion</button>
       </div>
       <div class="rightbox">
-        <h4>Calificacion de la comunidad</h4>
+        <h4>Calificación de la comunidad</h4>
         <div class="scorebox">
           <h3 *ngIf="movie.notaComunidad > 8.9" class="great-score">{{movie.notaComunidad| number:'1.1-1'}}</h3>
           <h3 *ngIf="movie.notaComunidad < 9 && movie.notaComunidad > 7.9 " class="good-score">{{movie.notaComunidad| number:'1.1-1'}}</h3>
@@ -61,6 +61,7 @@
         <h5>¿Qué calificación le das a la película?</h5>
         <div class="form-group">
           <select id="inputState" class="form-control" [(ngModel)]="score">
+            <option>0</option>
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -75,7 +76,7 @@
         </div>
         <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Escribe un comentario" [(ngModel)]="comment"></textarea>
         <br>
-        <button type="button" class="btn btn-dark">Enviar</button>
+        <button type="button" class="btn btn-dark" (click)="postComment()">Enviar</button>
       </div>
       </div>      
     </div>
@@ -83,6 +84,7 @@
 </section>
 <section *ngIf="msize>0 && loading==false">
   <h1 class="commentsection" >Según la comunidad:</h1>
+  <div class="stable">
   <table class="table" >
     <thead class="thead-dark">
       <tr>
@@ -91,7 +93,7 @@
         <th>Comentario</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="scrollable">
       <tr *ngFor="let comment of comments">
         <th></th>
         <td>{{comment.calificacion}}</td>
@@ -99,6 +101,7 @@
       </tr>
     </tbody>
   </table>
+</div>
 </section>
   <div class="alert alert-dark" role="alert" *ngIf="csize==0 && loading==false && msize>0">
     Nadie ha calificado esta pelicula
