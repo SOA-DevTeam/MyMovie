@@ -10,7 +10,7 @@
       <h3>Escoge un género y por distintos criterios te daremos la mejor recomendación </h3>
       <h3>para que la disfrutes!</h3>
       <br>
-      <h3><a href="">Aquí puedes ir a la sección de recomendaciones</a></h3>
+      <h3><a [routerLink]="['recommendation-filter']" routerLinkActive="active">Aquí puedes ir a la sección de recomendaciones</a></h3>
       <br>
     </div>
   </div>
@@ -23,6 +23,7 @@
       <br>
       <h3>También puedes dejar tu propia reseña sobre la película</h3>
       <br>
+      <h3><a [routerLink]="['busqueda']" routerLinkActive="active">Aquí puedes buscar tus películas favoritas</a></h3>
     </div>
     <img src="https://www.flaticon.com/svg/static/icons/svg/3309/3309932.svg" class="ml-3" width="400" height="400">
   </div>
@@ -33,7 +34,7 @@
       <br>
       <h3>Ayuda a nuestra plataforma a crecer ingresando tus películas favoritas</h3>
       <br>
-      <h3>Puedes añadir la película en este <a href="">enlace</a></h3>
+      <h3><a [routerLink]="['nuevaPeli']" routerLinkActive="active">Aquí puedes añadir la película que desees</a></h3>
       <br>
     </div>
   </div>
