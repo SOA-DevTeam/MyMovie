@@ -40,6 +40,9 @@
         </div>
         <button color="primary" class="btn btn-dark" (click)="filter()">Filtrar</button>
       </div>
+      <div class="col-lg-8 col-sm-8" style="margin-right: 0%;" *ngIf = "noPeliculas != -1">
+        <h3 style="color: white;">No es posible ejecutar esta funcionalidad</h3>
+      </div>
       <div class="col-lg-8 col-sm-8" style="margin-right: 0%;">
         <div class="row" *ngFor = "let pel of peliculas">
             <img class="col-lg-4" src="{{ pel.imagen }}" alt="Card image" width="30" height="150">
