@@ -31,7 +31,6 @@ export class RecommendationFilterComponent implements OnInit {
   total : number = 100;
 
   goodT : number = -1;
-  
 
   goodF : number = -1;
 
@@ -39,7 +38,9 @@ export class RecommendationFilterComponent implements OnInit {
 
   genero : number = 0;
 
-  peliculas : PeliculasCalificadas[];
+  noPeliculas : number = -1;
+
+  peliculas : PeliculasCalificadas[] = [];
 
   ngOnInit(): void {
       this.httpS.getAllGen().subscribe(result => {
@@ -75,6 +76,11 @@ export class RecommendationFilterComponent implements OnInit {
       this.popularity.toString(), 
       this.platform.toString()).subscribe(result => {
         this.peliculas = result;
+        if(this.peliculas[0] == undefined){
+          this.noPeliculas = 1;
+        }else{
+          this.noPeliculas = -1;
+        }
       }, error => console.error());
     }
   }
