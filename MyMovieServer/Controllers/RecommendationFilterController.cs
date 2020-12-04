@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using MyMovieServer.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using MyMovieServer.Logic;
 using MyMovieServer.Presentation_Model;
-using System.Net.Security;
 
 namespace MyMovieServer.Controllers
 {
@@ -36,10 +32,10 @@ namespace MyMovieServer.Controllers
                 cal = logica.notacomunidad(pel.IdPelicula, _context);
                 pel.Calificacion = cal;
                 pel.Total = pel.Calificacion * (comunidad * 0.01m) +
-                    pel.NotaMetascore * (metascore * 0.01m) +
-                    pel.NotaImdb * (imdb * 0.01m) +
-                    (Convert.ToInt32(pel.Favorito) * 10) * (favorito * 0.01m)
-                    + pel.IndicePopularidad * (popularidad * 0.01m);
+                    pel.NotaMetascore * (metascore * 0.1m) +
+                    pel.NotaImdb * (imdb * 0.1m) +
+                    (Convert.ToInt32(pel.Favorito) * 100) * (favorito * 0.01m)
+                    + pel.IndicePopularidad * (popularidad * 0.1m);
                 calificacionesPel.Add(pel);
             }
             IEnumerable<CalificacionesDePelicula> peliculaCalificadas =
