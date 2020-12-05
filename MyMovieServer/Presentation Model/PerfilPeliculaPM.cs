@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyMovieServer.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,9 +12,9 @@ namespace MyMovieServer.Presentation_Model
         public string NombrePelicula { get; set; }
         public string AnoPelicula { get; set; }
         public string Director { get; set; }
-        public string Genero { get; set; }
-        public string Idioma { get; set; }
-        public string Estilo { get; set; }
+        public Genero Genero { get; set; }
+        public Idioma Idioma { get; set; }
+        public Estilo Estilo { get; set; }
         public string Imagen { get; set; }
         public bool Favorito { get; set; }
         public decimal NotaComunidad { get; set; }

@@ -17,46 +17,8 @@
 <div class="container-fluid" id="div">
     <div class="container">
         <div class="row">
-          <div class="col-sm-4" *ngFor="let mov of movie" id="div1">
-            <p class="h2">Datos Actuales de la Película</p>
-            <br>
-            <div class="leftbox">
-              <br>
-              <h4>Nombre:</h4>
-              <h5>{{mov.nombrePelicula}}</h5>
-              <br>
-              <h4>Director:</h4>
-              <h5>{{mov.director}}</h5>
-              <br>
-              <h4>Año:</h4>
-              <h5>{{mov.anoPelicula}}</h5>
-              <br>
-              <h4>Genero:</h4>
-              <h5>{{mov.genero}}</h5>
-              <br>
-              <h4>Idioma:</h4>
-              <h5>{{mov.idioma}}</h5>
-              <br>
-              <h4>Estilo:</h4>
-              <h5>{{mov.estilo}}</h5>
-              <br>
-              <h4>Nota IMDb:</h4>
-              <h5>{{mov.notaIMDb}}</h5>
-              <br>
-              <h4>Nota Metascore:</h4>
-              <h5>{{mov.notaMetascore}}</h5>
-              <br>
-              <h4>Nota Comunidad:</h4>
-              <h5>{{mov.notaComunidad}}</h5>
-              <br>
-              <h4>Favorita de la Plataforma:</h4>
-              <h5 *ngIf="mov.favorito === true" >Sí</h5>
-              <h5 *ngIf="mov.favorito === false" >No</h5>
-              <br>
-              </div>
-          </div>
-          <div class="col-sm-8" id="div2">
-            <p class="h2">Nuevos Datos de la Película</p>
+          <div class="col-sm-12" id="div2">
+            <p class="h2">Datos de la Película</p>
             <br>
             <form [formGroup]="moviesForm" (ngSubmit)="onSubmit()">
               <div class="form-group row">
@@ -96,7 +58,7 @@
                   <label for="LangSelector" class="col-5 col-form-label h4 text-center"><p class="h4">Idioma:</p></label>
                   <div class="col">
                       <select class="form-control" formControlName="language" id="LangSelector" name="lSelector" [(ngModel)]="langSelected" required>
-                          <option value="" disabled>Escoja un Idioma</option>
+                          <option [ngValue]="" selected>{{idioma.idioma1}}</option>
                           <option *ngFor="let la of langs$" [ngValue]="la.id">{{la.nombre}}</option>
                       </select>
                   </div>
@@ -115,10 +77,7 @@
               <div class="form-group row">
                   <label for="MdbSelector" class="col-5 col-form-label h4 text-center"><p class="h4">Nota IMDb:</p></label>
                   <div class="col">
-                      <select class="form-control " formControlName="notaMdb" id="mdbSelector"  [(ngModel)]="notaMDbSelected" name="mSelector" required>
-                          <option value="" disabled>Nota Mdb</option>
-                          <option *ngFor="let nota of Notas" [ngValue]="nota">{{nota}}</option>
-                      </select>
+                    <input type="number" class="form-control" formControlName="notaMdb" id="mdbSelector" [(ngModel)]="notaMDbSelected" max="10" min="0" step="0.1">
                   </div>
               </div>
               <br> 
@@ -145,7 +104,7 @@
               <div class="form-group row">
                   <br>
                   <div class="col">
-                      <button type="submit" [disabled]="!moviesForm.valid" class="btn" id="agbtn"><strong> Modificar Datos</strong>
+                      <button type="submit" class="btn" id="agbtn"><strong> Modificar Datos</strong>
                       </button>
                   </div>
                   <div class="col-10">

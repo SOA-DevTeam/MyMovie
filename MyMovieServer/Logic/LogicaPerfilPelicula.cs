@@ -34,8 +34,11 @@ namespace MyMovieServer.Logic
                                 peli.NotaImdb,
                                 peli.NotaMetascore,
                                 gene.Genero1,
+                                gene.IdGenero,
                                 idio.Idioma1,
+                                idio.IdIdioma,
                                 esti.Estilo1,
+                                esti.IdEstilo,
                                 peli.Imagen,
                                 peli.IndicePopularidad
                             } into gr
@@ -53,7 +56,10 @@ namespace MyMovieServer.Logic
                                 NotaIMDb = gr.Key.NotaImdb,
                                 NotaMetascore = gr.Key.NotaMetascore,
                                 IndicePopularidad = gr.Key.IndicePopularidad,
-                                Promedio = gr.Average(x => x.Calificacion1)
+                                Promedio = gr.Average(x => x.Calificacion1),
+                                IdGenero = gr.Key.IdGenero,
+                                IdIdioma = gr.Key.IdIdioma,
+                                IdEstilo = gr.Key.IdEstilo
                             }).ToList();
 
 
@@ -66,10 +72,16 @@ namespace MyMovieServer.Logic
                 spelicula.NombrePelicula = pelicula.ElementAt(i).NombrePelicula;
                 spelicula.Director = pelicula.ElementAt(i).Director;
                 spelicula.AnoPelicula = pelicula.ElementAt(i).AnoPelicula;
-                spelicula.Genero = pelicula.ElementAt(i).Genero;
-                spelicula.Idioma = pelicula.ElementAt(i).Idioma;
+                spelicula.Genero = new Genero();
+                spelicula.Genero.Genero1 = pelicula.ElementAt(i).Genero;
+                spelicula.Genero.IdGenero = pelicula.ElementAt(i).IdGenero;
+                spelicula.Idioma = new Idioma(); 
+                spelicula.Idioma.IdIdioma = pelicula.ElementAt(i).IdIdioma;
+                spelicula.Idioma.Idioma1 = pelicula.ElementAt(i).Idioma;
                 spelicula.Imagen = pelicula.ElementAt(i).Imagen;
-                spelicula.Estilo = pelicula.ElementAt(i).Estilo;
+                spelicula.Estilo = new Estilo();
+                spelicula.Estilo.IdEstilo = pelicula.ElementAt(i).IdEstilo;
+                spelicula.Estilo.Estilo1 = pelicula.ElementAt(i).Estilo;
                 spelicula.Favorito = (bool)pelicula.ElementAt(i).Favorito;
                 spelicula.NotaIMDb = (decimal)pelicula.ElementAt(i).NotaIMDb;
                 spelicula.NotaMetascore = (decimal)pelicula.ElementAt(i).NotaMetascore;

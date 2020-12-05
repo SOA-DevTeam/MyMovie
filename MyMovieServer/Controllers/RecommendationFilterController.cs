@@ -31,11 +31,11 @@ namespace MyMovieServer.Controllers
             {
                 cal = logica.notacomunidad(pel.IdPelicula, _context);
                 pel.Calificacion = cal;
-                pel.Total = pel.Calificacion * (comunidad * 0.01m) +
+                pel.Total = pel.Calificacion * (comunidad * 0.1m) +
                     pel.NotaMetascore * (metascore * 0.1m) +
                     pel.NotaImdb * (imdb * 0.1m) +
                     (Convert.ToInt32(pel.Favorito) * 100) * (favorito * 0.01m)
-                    + pel.IndicePopularidad * (popularidad * 0.1m);
+                    + pel.IndicePopularidad * (popularidad * 0.01m);
                 calificacionesPel.Add(pel);
             }
             IEnumerable<CalificacionesDePelicula> peliculaCalificadas =
