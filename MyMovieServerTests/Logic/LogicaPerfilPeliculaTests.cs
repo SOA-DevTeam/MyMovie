@@ -23,7 +23,7 @@ namespace MyMovieServer.Logic.Tests
             //Tambien se comprueba que la mayoria de los datos son los mismos del elemento en la base de datos
             var isEqual = request.Count == 1 && response.idPelicula == 1493 && response.NombrePelicula.Equals("The TEST Movie")
                 && response.Director.Equals("Mark Tester") && response.AnoPelicula.Equals("2020") 
-                && response.Genero.Equals("Terror") && response.Idioma.Equals("Ingles") && response.Estilo.Equals("Psicologico") && response.Favorito == false ;
+                && response.Genero.Genero1.Equals("Terror") && response.Idioma.Idioma1.Equals("Ingles") && response.Estilo.Estilo1.Equals("Psicologico") && response.Favorito == false ;
 
             //Si el elemento es igual, se pasa la prueba
             Assert.IsTrue(isEqual);
