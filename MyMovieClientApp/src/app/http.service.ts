@@ -18,19 +18,19 @@ export class HttpService {
   putResponse: string;
 
   getGenres() {
-    return this.http.get(this.devURL + 'generos');
+    return this.http.get(this.devURL + 'info_peli/generos');
   }
 
   getLang() {
-    return this.http.get(this.devURL + 'idiomas');
+    return this.http.get(this.devURL + 'info_peli/idiomas');
   }
 
   getStyles() {
-    return this.http.get(this.devURL + 'estilos');
+    return this.http.get(this.devURL + 'info_peli/estilos');
   }
 
   async addMovie(postData): Promise<string> {
-    await this.http.post((this.devURL + 'nuevaPeli'), postData).toPromise().then(response => {
+    await this.http.post((this.devURL + 'peliculas/agregar'), postData).toPromise().then(response => {
       this.postResponse = response.toString();
     });
     return this.postResponse
@@ -56,14 +56,14 @@ export class HttpService {
     return this.http.get<PeliculasCalificadas[]>(this.devURL + "rf/get/" + idGen + "/" + comunidad + "/" + imdb + "/" + metascore + "/" + popularidad + "/" + favorito);
   }
 
-  async postComment(postData): Promise<string>{
+  async postComment(postData): Promise<string> {
     await this.http.post((this.devURL + 'comentar'), postData).toPromise().then(response => {
       this.postResponse = response.toString();
     });
     return this.postResponse;
   }
 
-  async putPopularity(putData): Promise<string>{
+  async putPopularity(putData): Promise<string> {
     await this.http.put((this.devURL + 'comentar'), putData).toPromise().then(response => {
       this.putResponse = response.toString();
     });
