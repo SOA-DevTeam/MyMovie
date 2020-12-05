@@ -14,13 +14,13 @@
         <h5>{{movie.anoPelicula}}</h5>
         <br>
         <h4>Genero:</h4>
-        <h5>{{movie.genero}}</h5>
+        <h5>{{movie.genero.genero1}}</h5>
         <br>
         <h4>Idioma:</h4>
-        <h5>{{movie.idioma}}</h5>
+        <h5>{{movie.idioma.idioma1}}</h5>
         <br>
         <h4>Estilo:</h4>
-        <h5>{{movie.estilo}}</h5>
+        <h5>{{movie.estilo.estilo1}}</h5>
         <br>
         <br>
         <button type="button" class="btn btn-dark"[routerLink]="['../editar', movie.idPelicula]" routerLinkActive="active">Editar Informacion</button>

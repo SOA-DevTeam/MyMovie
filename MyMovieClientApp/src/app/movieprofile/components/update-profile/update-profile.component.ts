@@ -51,6 +51,15 @@ export class UpdateProfileComponent implements OnInit {
   favSelected: boolean;
   popularity: number;
   putStatus: number;
+  idioma = {idIdioma: 0, idioma1 : "", pelicula : []};
+  estilo = {
+    idEstilo: 0,
+    estilo1: "",
+    pelicula: []};
+  genero = {idGenero: 0,
+    genero1: "",
+    pelicula: [ ]
+    };
 
   //original data
   movie: Object;
@@ -89,7 +98,23 @@ export class UpdateProfileComponent implements OnInit {
     var request = Array.of(this.http.getMovie(this.route.snapshot.params['id']).subscribe(data => {
       this.movie = data;
       this.imageSelected = data[0].imagen;
+      this.nameSelected = data[0].nombrePelicula;
+      this.directorSelected = data[0].director;
+      this.yearSelected = data[0].anoPelicula;
+      this.genreSelected = data[0].genero.idGenero;
+      this.langSelected = data[0].idioma.idIdioma;
+      this.styleSelected = data[0].estilo.idEstilo;
+      this.notaMDbSelected = data[0].notaIMDb;
+      this.idioma = data[0].idioma;
+      this.genero = data[0].genero;
+      this.estilo = data[0].estilo;
+      this.notaMetaSelected = data[0].notaMetascore;
       this.movieYear = data[0].anno;
+      if(data[0].favorito == true){
+        this.sysFav = "Sí";
+      }else{
+        this.sysFav = "No";
+      }
       this.movieFav = data[0].favorito;
       this.moviePop = data[0].notaComunidad;
       this.popularity = this.moviePop;
@@ -166,7 +191,6 @@ export class UpdateProfileComponent implements OnInit {
       this.putSuccess();
     }
     this.moviesForm.reset();
-
   }
 
   //image selection logic
