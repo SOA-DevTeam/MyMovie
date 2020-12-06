@@ -19,59 +19,59 @@ export class HttpService {
   putResponse: string;
 
   getGenres() {
-    return this.http.get(this.devURL + 'info_peli/generos');
+    return this.http.get(this.prodURL + 'info_peli/generos');
   }
 
   getLang() {
-    return this.http.get(this.devURL + 'info_peli/idiomas');
+    return this.http.get(this.prodURL + 'info_peli/idiomas');
   }
 
   getStyles() {
-    return this.http.get(this.devURL + 'info_peli/estilos');
+    return this.http.get(this.prodURL + 'info_peli/estilos');
   }
 
   async addMovie(postData): Promise<string> {
-    await this.http.post((this.devURL + 'peliculas/agregar'), postData).toPromise().then(response => {
+    await this.http.post((this.prodURL + 'peliculas/agregar'), postData).toPromise().then(response => {
       this.postResponse = response.toString();
     });
     return this.postResponse
   }
 
   getMovies(name: string) {
-    return this.http.get(this.devURL + 'busqueda/' + name);
+    return this.http.get(this.prodURL + 'busqueda/' + name);
   }
 
   getMovie(id: string) {
-    return this.http.get(this.devURL + 'busqueda/pelicula/' + id);
+    return this.http.get(this.prodURL + 'busqueda/pelicula/' + id);
   }
 
   getComments(id: string) {
-    return this.http.get(this.devURL + 'peliculas/comentarios/' + id);
+    return this.http.get(this.prodURL + 'peliculas/comentarios/' + id);
   }
 
   getAllGen() {
-    return this.http.get<Genero[]>(this.devURL + "info_peli/generos");
+    return this.http.get<Genero[]>(this.prodURL + "info_peli/generos");
   }
 
   getMoviesFilter(idGen: string, comunidad: string, imdb: string, metascore: string, popularidad: string, favorito: string) {
-    return this.http.get<PeliculasCalificadas[]>(this.devURL + "peliculas/rec/" + idGen + "/" + comunidad + "/" + imdb + "/" + metascore + "/" + popularidad + "/" + favorito);
+    return this.http.get<PeliculasCalificadas[]>(this.prodURL + "peliculas/rec/" + idGen + "/" + comunidad + "/" + imdb + "/" + metascore + "/" + popularidad + "/" + favorito);
   }
 
   async postComment(postData): Promise<any> {
-    await this.http.post((this.devURL + 'peliculas/comentarios/nuevo'), postData).toPromise().then(response => {
+    await this.http.post((this.prodURL + 'peliculas/comentarios/nuevo'), postData).toPromise().then(response => {
       this.commentResponse = response;
     });
     return this.commentResponse;
   }
 
   async putPopularity(putData): Promise<string> {
-    await this.http.put((this.devURL + 'peliculas/ind_pop'), putData).toPromise().then(response => {
+    await this.http.put((this.prodURL + 'peliculas/ind_pop'), putData).toPromise().then(response => {
       this.putResponse = response.toString();
     });
     return this.putResponse;
   }
   async updateMovie(putData): Promise<string> {
-    await this.http.put((this.devURL + 'peliculas/modificar'), putData).toPromise().then(response => {
+    await this.http.put((this.prodURL + 'peliculas/modificar'), putData).toPromise().then(response => {
       this.putResponse = response.toString();
     });
     return this.putResponse;
