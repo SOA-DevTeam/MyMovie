@@ -8,9 +8,7 @@ using MyMovieServer.Presentation_Model;
 using MyMovieServer.Mapping;
 using MyMovieServer.Repositories;
 using MyMovieServer.UoW;
-
-
-
+using MyMovieServer.Logic;
 
 namespace MyMovieServer.Controllers
 {
@@ -38,10 +36,10 @@ namespace MyMovieServer.Controllers
             return Ok(peliMap);
         }
 
-        [HttpPut("modificar/{id}")]
-        public IActionResult UpdatePelicula(ModPeliculaPM data, int id)
+        [HttpPut("modificar")]
+        public IActionResult UpdatePelicula(ModPeliculaPM data)
         {
-            var getP = repository.GetPeliMod(id);
+            var getP = repository.GetPeliMod(data.id);
             if (getP == null)
             {
                 return NotFound();
@@ -51,5 +49,58 @@ namespace MyMovieServer.Controllers
             uow.CompleteAsync();
             return Ok(pelicula);
         }
+
+        [HttpGet("comentarios/{id}")]
+        public IActionResult GetComentarios(int id)
+        {
+            var comentarios = repository.GetCalificacionesByPelicula(id);
+            var result = mapper.Comentarios(comentarios);
+            return Ok(result);
+        }
+
+
+        [HttpPost("comentarios/nuevo")]
+        public IActionResult Comentar(ComentariosPM data)
+        {
+            var comentario = mapper.AgregarComentario(data);
+            repository.AddComentario(comentario);
+            uow.CompleteAsync();
+            return Ok(comentario);
+        }
+
+        [HttpPut("ind_pop")]
+        public IActionResult ActualizarPopularidad(PopularidadPM data)
+        {
+            var getP = repository.GetPeliMod(data.idPelicula);
+            if (getP == null)
+            {
+                return NotFound();
+            }
+            var pelicula = mapper.ActualizarIndicePop(getP, data);
+            repository.ModificarPelicula(pelicula);
+            uow.CompleteAsync();
+            return Ok(pelicula);
+        }
+
+        [HttpGet("rec/{gen}/{comunidad}/{imdb}/{metascore}/{popularidad}/{favorito}")]
+        public IActionResult GetPeliculaByRec(int gen, decimal comunidad, decimal imdb, decimal favorito, decimal metascore, decimal popularidad)
+        {
+            var peliculas = repository.Recomendacion(gen);
+            var calificaciones = mapper.Recomendaciones(peliculas);
+            var calificacionesPel = new List<CalificacionesDePelicula>();
+            LogicaFiltrosRecomendacion logica = new LogicaFiltrosRecomendacion();
+            decimal cal;
+            foreach (CalificacionesDePelicula pel in calificaciones)
+            {
+                cal = logica.CalcNotaComunidad(repository.GetCalificacionesByPelicula(pel.IdPelicula));
+                pel.Calificacion = cal;
+                logica.CalcTotal(pel, calificacionesPel, comunidad, imdb, favorito, metascore, popularidad);
+            }
+            var result = logica.OrderList(calificacionesPel);
+                
+            return Ok(result.Take(10));
+
+        }
+
     }
 }

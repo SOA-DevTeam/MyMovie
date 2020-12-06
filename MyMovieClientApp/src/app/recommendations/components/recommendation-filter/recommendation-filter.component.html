@@ -21,7 +21,7 @@
         <h2 class="ctitle">Filtros</h2>
         <label for="">Género: </label>
         <select name="" id="" class="form-control" [(ngModel)] = "genero">
-          <option [value]="gen.idGenero" *ngFor = "let gen of generos" >{{ gen.genero1 }}</option>
+          <option [value]="gen.id" *ngFor = "let gen of generos" >{{ gen.nombre }}</option>
         </select>
         <h5>Categorias:</h5>
         <label for="">Nota IMDB:</label>
@@ -44,8 +44,8 @@
         <h3 style="color: white;">No es posible ejecutar esta funcionalidad</h3>
       </div>
       <div class="col-lg-8 col-sm-8" style="margin-right: 0%;">
-        <div class="row" *ngFor = "let pel of peliculas">
-            <img class="col-lg-4" src="{{ pel.imagen }}" alt="Card image" width="30" height="150">
+        <div class="row" *ngFor = "let pel of peliculas" id="peli">
+            <img class="col-lg-4" src="{{ pel.imagen }}" alt="Card image" width="100" height="250">
             <div class="col-lg-6">
                 <h5><a [routerLink]="['../pelicula', pel.idPelicula]" routerLinkActive="active">{{ pel.nombrePelicula }}</a></h5>
                 <p >Calificación: {{ pel.total }}</p>

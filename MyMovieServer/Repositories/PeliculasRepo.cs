@@ -1,7 +1,11 @@
-﻿using MyMovieServer.Models;
+﻿using MyMovieServer.Logic;
+using MyMovieServer.Mapping;
+using MyMovieServer.Models;
+using MyMovieServer.Presentation_Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace MyMovieServer.Repositories
@@ -15,10 +19,10 @@ namespace MyMovieServer.Repositories
             this.context = context;
         }
 
-        public  Pelicula GetPeliMod(int id)
+        public Pelicula GetPeliMod(int id)
         {
-           return context.Pelicula.FirstOrDefault(item => item.IdPelicula == id);
-        } 
+            return context.Pelicula.FirstOrDefault(item => item.IdPelicula == id);
+        }
 
         public void AgregarPelicula(Pelicula pelicula)
         {
@@ -28,6 +32,21 @@ namespace MyMovieServer.Repositories
         public void ModificarPelicula(Pelicula pelicula)
         {
             context.Update(pelicula);
+        }
+
+        public List<Pelicula> Recomendacion(int id)
+        {
+            return context.Pelicula.Where(p=>p.IdGenero==id).ToList();
+        }
+
+        public List<Calificacion> GetCalificacionesByPelicula(int idPel)
+        {
+            return context.Calificacion.Where(c => c.IdPelicula == idPel).ToList();
+        }
+
+        public void AddComentario(Calificacion comentario) 
+        {
+            context.Add(comentario);
         }
 
     }

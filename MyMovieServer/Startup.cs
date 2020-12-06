@@ -50,6 +50,8 @@ namespace MyMovieServer
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IInfoPeliRepo, InfoPeliRepo>();
             services.AddScoped<IPeliculasRepo, PeliculasRepo>();
+            services.AddScoped<IBusquedaPeliRepo, BusquedaPeliRepo>();
+
 
             services.AddScoped<IKeyValueMap, KeyValueMap>();
             services.AddScoped<IPeliculaMap, PeliculaMap>();

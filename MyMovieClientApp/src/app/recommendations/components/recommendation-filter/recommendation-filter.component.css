@@ -1,7 +1,11 @@
-
-.container-a{
-    color: white;
+.container-a {
+  color: white;
 }
-.ctitle{
-    color: rgb(218, 81, 18);
+
+.ctitle {
+  color: rgb(218, 81, 18);
+}
+
+#peli {
+  margin: 1rem;
 }

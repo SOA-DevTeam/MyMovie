@@ -14,27 +14,27 @@ export class MovieprofileComponent implements OnInit {
   loading = true;
   // tslint:disable-next-line: ban-types
   comments: Object;
-  score= 0;
+  score = 0;
   comment: string;
-  msize=-1;
-  csize=-1;
+  msize = -1;
+  csize = -1;
   pop = 0;
 
   constructor(public httpService: HttpService, private route: ActivatedRoute) {
   }
   ngOnInit(): void {
-      this.getMovie();
-      this.getComments();
-      this.popUpdate();
+    this.getMovie();
+    this.getComments();
+    this.popUpdate();
   }
 
-  getMovie(){
+  getMovie() {
     this.httpService.getMovie(this.route.snapshot.params['id']).subscribe(data => {
       this.movies = data;
       this.msize = this.Size(this.movies);
-      });
+    });
   }
-  getComments(){
+  getComments() {
     this.httpService.getComments(this.route.snapshot.params['id']).subscribe(d => {
       this.loading = true;
       this.comments = d;
@@ -44,43 +44,44 @@ export class MovieprofileComponent implements OnInit {
     });
   }
 
-  async postComment(){
+  async postComment() {
     var request = this.httpService.postComment({
       idPelicula: this.route.snapshot.params['id'],
       calificacion: this.score,
       Comentario: this.comment
-  });
-  if (await request == "0") {
-    console.log("fail");
-  }else{
-    this.putPop();
-    this.getMovie();
-    this.getComments();
-    this.comment="";
-    this.popUpdate();
+    });
+
+    if ((await request == undefined)) {
+      console.log("fail");
+    } else {
+      this.putPop();
+      this.getMovie();
+      this.getComments();
+      this.comment = "";
+      this.popUpdate();
     }
   }
 
-  popUpdate(){
-    if(this.csize==0){
+  popUpdate() {
+    if (this.csize == 0) {
       this.pop = 15;
-    }else if(this.csize==5){
+    } else if (this.csize == 5) {
       this.pop = 10
-    }else if(this.csize==10){
+    } else if (this.csize == 10) {
       this.pop = 15;
-    }else if (this.csize==20){
+    } else if (this.csize == 20) {
       this.pop = 20;
-    }else{
+    } else {
       this.pop = 0;
     }
   }
 
-  async putPop(){
+  async putPop() {
     var request = this.httpService.putPopularity({
       idPelicula: this.route.snapshot.params['id'],
       indicePopularidad: this.pop
-  })
-}
+    })
+  }
   Size(obj) {
     var size = 0, key;
     for (key in obj) {

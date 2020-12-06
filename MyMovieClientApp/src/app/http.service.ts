@@ -15,6 +15,7 @@ export class HttpService {
   private devURL: string = "http://localhost:63546/";
   private prodURL: string = "https://mymovierest.azurewebsites.net/"
   postResponse: string;
+  commentResponse;
   putResponse: string;
 
   getGenres() {
@@ -37,40 +38,40 @@ export class HttpService {
   }
 
   getMovies(name: string) {
-    return this.http.get(this.devURL + 'busquedaPelicula/' + name);
+    return this.http.get(this.devURL + 'busqueda/' + name);
   }
 
   getMovie(id: string) {
-    return this.http.get(this.devURL + 'pelicula/' + id);
+    return this.http.get(this.devURL + 'busqueda/pelicula/' + id);
   }
 
   getComments(id: string) {
-    return this.http.get(this.devURL + 'pelicula/comentarios/' + id);
+    return this.http.get(this.devURL + 'peliculas/comentarios/' + id);
   }
 
   getAllGen() {
-    return this.http.get<Genero[]>(this.devURL + "rf/gen");
+    return this.http.get<Genero[]>(this.devURL + "info_peli/generos");
   }
 
   getMoviesFilter(idGen: string, comunidad: string, imdb: string, metascore: string, popularidad: string, favorito: string) {
-    return this.http.get<PeliculasCalificadas[]>(this.devURL + "rf/get/" + idGen + "/" + comunidad + "/" + imdb + "/" + metascore + "/" + popularidad + "/" + favorito);
+    return this.http.get<PeliculasCalificadas[]>(this.devURL + "peliculas/rec/" + idGen + "/" + comunidad + "/" + imdb + "/" + metascore + "/" + popularidad + "/" + favorito);
   }
 
-  async postComment(postData): Promise<string> {
-    await this.http.post((this.devURL + 'comentar'), postData).toPromise().then(response => {
-      this.postResponse = response.toString();
+  async postComment(postData): Promise<any> {
+    await this.http.post((this.devURL + 'peliculas/comentarios/nuevo'), postData).toPromise().then(response => {
+      this.commentResponse = response;
     });
-    return this.postResponse;
+    return this.commentResponse;
   }
 
   async putPopularity(putData): Promise<string> {
-    await this.http.put((this.devURL + 'comentar'), putData).toPromise().then(response => {
+    await this.http.put((this.devURL + 'peliculas/ind_pop'), putData).toPromise().then(response => {
       this.putResponse = response.toString();
     });
     return this.putResponse;
   }
   async updateMovie(putData): Promise<string> {
-    await this.http.put((this.devURL + 'modificar'), putData).toPromise().then(response => {
+    await this.http.put((this.devURL + 'peliculas/modificar'), putData).toPromise().then(response => {
       this.putResponse = response.toString();
     });
     return this.putResponse;
