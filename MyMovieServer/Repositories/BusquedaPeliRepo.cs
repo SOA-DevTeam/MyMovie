@@ -5,12 +5,53 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MyMovieServer.Logic
+namespace MyMovieServer.Repositories
 {
-    public class LogicaPerfilPelicula
+    public class BusquedaPeliRepo : IBusquedaPeliRepo
     {
+        private readonly MyMovieDBContext context;
 
-        public List<PerfilPeliculaPM> GetPelicula(int id, MyMovieDBContext context)
+        public BusquedaPeliRepo(MyMovieDBContext context)
+        {
+            this.context = context;
+        }
+
+        public List<PeliculaGeneralPM> Busqueda(string name)
+        {
+            List<PeliculaGeneralPM> peliculas = new List<PeliculaGeneralPM>();
+            var pelicula = (from peli in context.Pelicula
+                            join cali in context.Calificacion
+                            on peli.IdPelicula equals cali.IdPelicula into joined
+                            from joi in joined.DefaultIfEmpty()
+                            where peli.NombrePelicula.Contains(name)
+                            group joi by new { peli.IdPelicula, peli.NombrePelicula, peli.Director, peli.AnoPelicula } into gr
+                            select new
+                            {
+                                idPelicula = gr.Key.IdPelicula,
+                                NombrePelicula = gr.Key.NombrePelicula,
+                                Director = gr.Key.Director,
+                                AnoPelicula = gr.Key.AnoPelicula,
+                                Promedio = gr.Average(x => x.Calificacion1)
+                            }).ToList();
+
+
+            int i = 0;
+            foreach (var p in pelicula)
+            {
+                PeliculaGeneralPM spelicula = new PeliculaGeneralPM();
+                spelicula.idPelicula = pelicula.ElementAt(i).idPelicula;
+                spelicula.NombrePelicula = pelicula.ElementAt(i).NombrePelicula;
+                spelicula.Director = pelicula.ElementAt(i).Director;
+                spelicula.AnoPelicula = pelicula.ElementAt(i).AnoPelicula;
+                spelicula.NotaComunidad = pelicula.ElementAt(i).Promedio;
+                peliculas.Add(spelicula);
+                i++;
+
+            }
+            return peliculas;
+        }
+
+        public List<PerfilPeliculaPM> PerfilPelicula(int id)
         {
             List<PerfilPeliculaPM> peliculas = new List<PerfilPeliculaPM>();
             var pelicula = (from peli in context.Pelicula
@@ -75,7 +116,7 @@ namespace MyMovieServer.Logic
                 spelicula.Genero = new Genero();
                 spelicula.Genero.Genero1 = pelicula.ElementAt(i).Genero;
                 spelicula.Genero.IdGenero = pelicula.ElementAt(i).IdGenero;
-                spelicula.Idioma = new Idioma(); 
+                spelicula.Idioma = new Idioma();
                 spelicula.Idioma.IdIdioma = pelicula.ElementAt(i).IdIdioma;
                 spelicula.Idioma.Idioma1 = pelicula.ElementAt(i).Idioma;
                 spelicula.Imagen = pelicula.ElementAt(i).Imagen;
@@ -93,33 +134,5 @@ namespace MyMovieServer.Logic
             }
             return peliculas;
         }
-
-        public List<ComentariosPM> GetComentarios(int id, MyMovieDBContext context)
-        {
-            List<ComentariosPM> comentarios = new List<ComentariosPM>();
-            var comentario = (from coment in context.Calificacion
-                              where coment.IdPelicula == id
-                              select new
-                              {
-                                  idCalificacion = coment.IdCalificacion,
-                                  Calificacion = coment.Calificacion1,
-                                  Comentario = coment.Comentario
-                              }).ToList();
-
-            int i = 0;
-            foreach (var c in comentario)
-            {
-
-                ComentariosPM comenta = new ComentariosPM();
-                comenta.idCalificacion = comentario.ElementAt(i).idCalificacion;
-                comenta.Calificacion = (decimal)comentario.ElementAt(i).Calificacion;
-                comenta.Comentario = comentario.ElementAt(i).Comentario;
-                comentarios.Insert(0,comenta);
-                i++;
-
-            }
-            return comentarios;
-        }
-
     }
 }

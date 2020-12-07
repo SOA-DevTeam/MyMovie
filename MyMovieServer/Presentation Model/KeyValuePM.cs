@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MyMovieServer.Presentation_Model
 {
-    public class GenerosPM
+    public class KeyValuePM
     {
         public int id;
         public string nombre;

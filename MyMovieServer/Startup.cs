@@ -12,7 +12,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MyMovieServer.Logic;
 using MyMovieServer.Models;
+using MyMovieServer.Mapping;
+using Microsoft.EntityFrameworkCore;
+using MyMovieServer.Repositories;
 using Newtonsoft.Json.Serialization;
+using MyMovieServer.UoW;
 
 namespace MyMovieServer
 {
@@ -43,6 +47,14 @@ namespace MyMovieServer
             services.AddRazorPages().AddNewtonsoftJson();
             services.AddAuthentication(IISDefaults.AuthenticationScheme);
             services.AddDbContext<MyMovieDBContext>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IInfoPeliRepo, InfoPeliRepo>();
+            services.AddScoped<IPeliculasRepo, PeliculasRepo>();
+            services.AddScoped<IBusquedaPeliRepo, BusquedaPeliRepo>();
+
+
+            services.AddScoped<IKeyValueMap, KeyValueMap>();
+            services.AddScoped<IPeliculaMap, PeliculaMap>();
             services.AddScoped<MyMovieDBContext>();
             services.AddControllers();
         }

@@ -13,56 +13,36 @@ namespace MyMovieServer.Logic
 {
     public class LogicaFiltrosRecomendacion
     {
-        public List<CalificacionesDePelicula> getPeliculas(MyMovieDBContext context, int id)
-        {
-            List<CalificacionesDePelicula> peliculas = new List<CalificacionesDePelicula>();
-            foreach (Pelicula pelicula in context.Pelicula.ToList())
-            {
-                if (pelicula.IdGenero == id)
-                {
-                    CalificacionesDePelicula dummy = new CalificacionesDePelicula();
-                    dummy.IdGenero = pelicula.IdGenero;
-                    dummy.IdPelicula = pelicula.IdPelicula;
-                    dummy.Imagen = pelicula.Imagen;
-                    dummy.IndicePopularidad = pelicula.IndicePopularidad;
-                    dummy.NombrePelicula = pelicula.NombrePelicula;
-                    dummy.NotaImdb = pelicula.NotaImdb;
-                    dummy.NotaMetascore = pelicula.NotaMetascore;
-                    dummy.Favorito = pelicula.Favorito;
-                    peliculas.Add(dummy);
-                }
-            }
 
-            return peliculas;
-        }
-
-        public decimal notacomunidad(int idPelicula, MyMovieDBContext context)
+        public decimal CalcNotaComunidad(List<Calificacion> calificaciones)
         {
             decimal cal = 0.0m;
-            int contador = 0;
-            foreach(Calificacion c in context.Calificacion.ToList())
+            foreach (Calificacion c in calificaciones)
             {
-                if(c.IdPelicula == idPelicula)
-                {
                     cal += c.Calificacion1;
-                    contador += 1;
-                }
             }
-            if(contador != 0) { 
-                cal = cal / Convert.ToDecimal(contador);
+            if (calificaciones.Count != 0)
+            {
+                cal /= Convert.ToDecimal(calificaciones.Count);
             }
             return cal;
-
         }
 
-        public List<Genero> getGen(MyMovieDBContext _context)
+        public void CalcTotal(CalificacionesDePelicula pel, List<CalificacionesDePelicula> calList, decimal comunidad, decimal imdb, decimal favorito, decimal metascore, decimal popularidad)
         {
-            List<Genero> generos = new List<Genero>();
-            foreach (Genero gen in _context.Genero.ToList())
-            {
-                generos.Add(gen);
-            }
-            return generos;
+            pel.Total = pel.Calificacion * (comunidad * 0.1m) +
+            pel.NotaMetascore * (metascore * 0.1m) +
+            pel.NotaImdb * (imdb * 0.1m) +
+            (Convert.ToInt32(pel.Favorito) * 100) * (favorito * 0.01m)
+            + pel.IndicePopularidad * (popularidad * 0.01m);
+            calList.Add(pel);
         }
+
+        public IEnumerable<CalificacionesDePelicula> OrderList(List<CalificacionesDePelicula> list)
+        {
+            IEnumerable<CalificacionesDePelicula> peliculaCalificadas = from p in list orderby p.Total descending select p;
+            return peliculaCalificadas;
+        }
+        
     }
 }
