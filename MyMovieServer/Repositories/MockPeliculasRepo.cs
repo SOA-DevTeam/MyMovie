@@ -70,13 +70,16 @@ namespace MyMovieServer.Repositories
 
         public Pelicula GetPeliMod(int id)
         {
+            Console.WriteLine(id);
             return peliculas.Find(p => p.IdPelicula == id);
         }
 
         public void ModificarPelicula(Pelicula pelicula)
         {
-            var index = peliculas.FindIndex(p => p.IdPelicula == pelicula.IdPelicula);
-            peliculas[index] = pelicula;
+
+            Console.WriteLine(pelicula.IdPelicula);
+
+
         }
 
         public List<Pelicula> Recomendacion(int id)

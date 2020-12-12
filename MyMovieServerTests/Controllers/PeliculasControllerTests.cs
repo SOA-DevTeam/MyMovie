@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using MyMovieServer.Controllers;
 using MyMovieServer.Mapping;
@@ -15,16 +16,17 @@ namespace MyMovieServer.Controllers.Tests
     [TestClass()]
     public class PeliculasControllerTests
     {
-        Mock<IPeliculaMap> mapper = new Mock<IPeliculaMap>();
-        Mock<IPeliculasRepo> repository = new Mock<IPeliculasRepo>();
-        Mock<IUnitOfWork> unitOfWork = new Mock<IUnitOfWork>();
+        
 
         [TestMethod()]
         public void AddPeliculaTest()
         {
+            var mapper = new Mock<IPeliculaMap>();
+            var repository = new Mock<IPeliculasRepo>();
+            var unitOfWork = new Mock<IUnitOfWork>();
             IPeliculasRepo repo = new MockPeliculasRepo();
 
-            var prueba = new PeliculasController(repo, unitOfWork.Object,mapper.Object);
+            var prueba = new PeliculasController(repo, unitOfWork.Object, mapper.Object);
             var pelicula = new NuevaPeliculaPM();
             pelicula.nombre = "Pelicula nueva";
             pelicula.director = "Director";
@@ -38,27 +40,105 @@ namespace MyMovieServer.Controllers.Tests
             pelicula.imagen = "imagen";
             pelicula.pop = 10;
 
-            
-            try { 
+
+            try
+            {
                 prueba.AddPelicula(pelicula);
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 Console.WriteLine(e);
                 Assert.Fail();
             }
-            
+
         }
 
         [TestMethod()]
         public void UpdatePeliculaTest()
         {
-            Assert.Fail();
+            var mapper = new Mock<PeliculaMap>();
+            var repository = new Mock<IPeliculasRepo>();
+            var unitOfWork = new Mock<IUnitOfWork>();
+            IPeliculasRepo repo = new MockPeliculasRepo();
+
+            var peli = new ModPeliculaPM
+            {
+                id = 1,
+                nombre = "nombre modificado",
+                director = "director",
+                anno = 2000,
+                genero = 1,
+                estilo = 1,
+                idioma = 1,
+                mdb = 10,
+                meta = 10,
+                fav = true,
+                pop = 20,
+                imagen = "imagen",
+            };
+
+            var prueba = new PeliculasController(repo, unitOfWork.Object, mapper.Object);
+
+            prueba.UpdatePelicula(peli);
+            
         }
 
         [TestMethod()]
         public void GetComentariosTest()
         {
-            Assert.Fail();
+            var mapper = new Mock<IPeliculaMap>();
+            var repository = new Mock<IPeliculasRepo>();
+            var unitOfWork = new Mock<IUnitOfWork>();
+            IPeliculasRepo repo = new MockPeliculasRepo();
+
+            var prueba = new PeliculasController(repo, unitOfWork.Object, mapper.Object);
+            var comentarios = prueba.GetComentarios(1);
+            Assert.IsInstanceOfType(comentarios, typeof(ObjectResult));
+            var response = comentarios as ObjectResult;
+            Assert.AreEqual(200, response.StatusCode);
+
+
+        }
+
+        [TestMethod()]
+        public void ActualizarPopularidadTest()
+        {
+            var mapper = new Mock<PeliculaMap>();
+            var repository = new Mock<IPeliculasRepo>();
+            var unitOfWork = new Mock<IUnitOfWork>();
+            PopularidadPM pop = new PopularidadPM
+            {
+                idPelicula = 1,
+                indicePopularidad = 15
+            };
+            IPeliculasRepo repo = new MockPeliculasRepo();
+            var prueba = new PeliculasController(repo, unitOfWork.Object, mapper.Object);
+            try
+            {
+                prueba.ActualizarPopularidad(pop);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Assert.Fail();
+            }
+
+        }
+
+        [TestMethod()]
+        public void GetPeliculaByRecTest()
+        {
+            var mapper = new Mock<PeliculaMap>();
+            var repository = new Mock<IPeliculasRepo>();
+            var unitOfWork = new Mock<IUnitOfWork>();
+            IPeliculasRepo repo = new MockPeliculasRepo();
+
+            var prueba = new PeliculasController(repo, unitOfWork.Object, mapper.Object);
+            var resul = prueba.GetPeliculaByRec(1, 20, 20, 20, 20, 20);
+            Assert.IsInstanceOfType(resul, typeof(ObjectResult));
+            var response = resul as ObjectResult;
+            Assert.AreEqual(200, response.StatusCode);
+
         }
     }
 }
