@@ -1,5 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using MyMovieServer.Controllers;
+using MyMovieServer.Mapping;
+using MyMovieServer.Repositories;
+using MyMovieServer.UoW;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,13 +17,27 @@ namespace MyMovieServer.Controllers.Tests
         [TestMethod()]
         public void GetPeliculasByNameTest()
         {
-            Assert.Fail();
+            var repository = new Mock<IPeliculasRepo>();
+            IBusquedaPeliRepo repo = new MockBusquedaPeliRepo();
+
+            var prueba = new DatosPeliculaController(repo);
+            var resul = prueba.GetPeliculasByName("Pelicula");
+            Assert.IsInstanceOfType(resul, typeof(ObjectResult));
+            var response = resul as ObjectResult;
+            Assert.AreEqual(200, response.StatusCode);
         }
 
         [TestMethod()]
         public void GetPeliculaTest()
         {
-            Assert.Fail();
+            var repository = new Mock<IPeliculasRepo>();
+            IBusquedaPeliRepo repo = new MockBusquedaPeliRepo();
+
+            var prueba = new DatosPeliculaController(repo);
+            var resul = prueba.GetPelicula(1);
+            Assert.IsInstanceOfType(resul, typeof(ObjectResult));
+            var response = resul as ObjectResult;
+            Assert.AreEqual(200, response.StatusCode);
         }
     }
 }

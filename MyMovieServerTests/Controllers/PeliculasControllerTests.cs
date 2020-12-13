@@ -79,8 +79,11 @@ namespace MyMovieServer.Controllers.Tests
 
             var prueba = new PeliculasController(repo, unitOfWork.Object, mapper.Object);
 
-            prueba.UpdatePelicula(peli);
-            
+            var req = prueba.UpdatePelicula(peli);
+            Assert.IsInstanceOfType(req, typeof(ObjectResult));
+            var response = req as ObjectResult;
+            Assert.AreEqual(200, response.StatusCode);
+
         }
 
         [TestMethod()]
@@ -115,11 +118,13 @@ namespace MyMovieServer.Controllers.Tests
             var prueba = new PeliculasController(repo, unitOfWork.Object, mapper.Object);
             try
             {
-                prueba.ActualizarPopularidad(pop);
+                var req = prueba.ActualizarPopularidad(pop);
+                Assert.IsInstanceOfType(req, typeof(ObjectResult));
+                var response = req as ObjectResult;
+                Assert.AreEqual(200, response.StatusCode);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
                 Assert.Fail();
             }
 
